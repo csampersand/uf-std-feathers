@@ -1,0 +1,34 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "mongodb": "mongodb://localhost:27017/uf_std",
+  "authentication": {
+    "secret": "1e6745c186df112b4f0af5ef62559d8d992049bc6d494c643fc737c278feaa7605e5d794ee9413ef27615437f6735fcde5453aa5a2d560d6a860fca62ec01d2ba6ca6203192923f4e9ad3c12eb99a3c9171eb6db11e2d0fa1a6b3a812ccd57476ee5dd423fed606391ea7915b3628a8373ad3fde990cea76793577e16fdafe6a7dccf7bf098c75614ac2ceb83c5a9dac0ce7217ffc229fb583a45aff6a39141880218dba8454584a8456cc6eebcdae4b9ed7c6fe6850302e35c1e15c5b1c413bcace3f18ccca26e249607746201b5ad60197f3af2491a468ea77ab1b74d388a2681e631fe3dea1cf76e4984dddde42216c261312785b89ec792092b3b9f751c1",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
+}
