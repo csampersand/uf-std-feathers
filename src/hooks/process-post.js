@@ -5,12 +5,13 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
         const { data } = context;
 
-        // Throw an error if we didn't get a text
+        // Throw an error if we didn't get a title
         if (!data.title) {
-            throw new Error('A post must have a title');
+            throw new Error('Post must have a title');
         }
+        // Throw an error if we didn't get a body
         if (!data.body) {
-            throw new Error('A post must have a body');
+            throw new Error('Post must have a body');
         }
 
         // The authenticated user
