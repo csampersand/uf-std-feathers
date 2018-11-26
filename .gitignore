@@ -111,3 +111,4 @@ $RECYCLE.BIN/
 lib/
 data/
 rest-api-calls.paw
+public/app.js
