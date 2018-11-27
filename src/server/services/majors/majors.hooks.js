@@ -1,6 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-const { addMajor } = require('../../hooks/add-majors')
+//const { addMajor } = require('../../hooks/add-majors')
 
 module.exports = {
   before: {
