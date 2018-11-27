@@ -15,7 +15,7 @@ feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
 
 feathersClient.authenticate({
     strategy: 'local',
-    email: 'chris.scott.anders@gmail.com',
+    email: 'rahul.d.patel352@gmail.com',
     password: 'secret'
 })
     .then(response => {
