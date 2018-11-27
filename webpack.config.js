@@ -31,5 +31,10 @@ module.exports = {
         net: 'empty',
         tls: 'empty',
         fs: 'empty'
+    },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.js'
+        }
     }
 };

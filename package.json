@@ -54,6 +54,8 @@
     "mongoose": "^5.3.13",
     "serve-favicon": "^2.5.0",
     "superagent": "^4.0.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2",
     "winston": "^3.1.0"
   },
   "devDependencies": {
