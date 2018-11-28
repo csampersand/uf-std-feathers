@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Foo from './components/Foo.vue'
+import Navbar from './components/Navbar.vue'
+
+Vue.component('Navbar', Navbar);
 
 window.onload = () => {
     // VUE ROUTING

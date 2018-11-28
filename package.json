@@ -33,7 +33,7 @@
   "scripts": {
     "test": "npm run eslint && NODE_ENV= npm run mocha",
     "eslint": "eslint src/server/. test/. --config .eslintrc.json",
-    "dev": "webpack && nodemon src/server/",
+    "dev": "webpack && nodemon -e vue src/server/",
     "start": "node src/server/",
     "mocha": "mocha test/ --recursive --exit",
     "build": "webpack"
