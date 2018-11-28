@@ -21,12 +21,14 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         // The post body
         const body = context.data.body;
 
+        const id = context.data.author;
+
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             title,
             body,
             // Set the user id
-            author: user._id,
+            author: id,
             comments: []
         };
 
