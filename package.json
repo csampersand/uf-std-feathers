@@ -33,13 +33,14 @@
   "scripts": {
     "test": "npm run eslint && NODE_ENV= npm run mocha",
     "eslint": "eslint src/server/. test/. --config .eslintrc.json",
-    "dev": "webpack && nodemon src/server/",
+    "dev": "webpack && nodemon -e vue,js,html src/server/",
     "start": "node src/server/",
     "mocha": "mocha test/ --recursive --exit",
     "build": "webpack",
     "seeds": "babel-node seeds.js"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@feathersjs/authentication": "^2.1.13",
     "@feathersjs/authentication-jwt": "^2.0.7",
     "@feathersjs/authentication-local": "^1.2.7",
@@ -49,6 +50,7 @@
     "compression": "^1.7.3",
     "cors": "^2.8.5",
     "faker": "^4.1.0",
+    "css-loader": "^1.0.1",
     "feathers-mongoose": "^6.2.0",
     "helmet": "^3.15.0",
     "localstorage-memory": "^1.0.3",
@@ -77,6 +79,9 @@
     "nodemon": "^1.18.6",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2"
   }
