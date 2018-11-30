@@ -33,12 +33,13 @@
   "scripts": {
     "test": "npm run eslint && NODE_ENV= npm run mocha",
     "eslint": "eslint src/server/. test/. --config .eslintrc.json",
-    "dev": "webpack && nodemon src/server/",
+    "dev": "webpack && nodemon -e vue,js,html src/server/",
     "start": "node src/server/",
     "mocha": "mocha test/ --recursive --exit",
     "build": "webpack"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@feathersjs/authentication": "^2.1.13",
     "@feathersjs/authentication-jwt": "^2.0.7",
     "@feathersjs/authentication-local": "^1.2.7",

@@ -5,9 +5,11 @@ const auth = require('@feathersjs/authentication-client');
 const superagent = require('superagent');
 const localStorage = require('localstorage-memory');
 
-const feathersClient = feathers();
+const client = feathers();
 
-feathersClient.configure(rest('http://localhost:3030').superagent(superagent))
+import './router.js'
+
+client.configure(rest('http://localhost:3030').superagent(superagent))
     .configure(auth({ storage: localStorage }));
 
 feathersClient.authenticate({
@@ -30,5 +32,3 @@ feathersClient.authenticate({
     .catch(function (error) {
         console.error('Error authenticating!', error);
     });
-
-import './router.js'

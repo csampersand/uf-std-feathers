@@ -1,4 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const populateMajors = require('../../hooks/populate-majors');
 
 const {
   hashPassword, protect
@@ -22,7 +23,7 @@ module.exports = {
       protect('password')
     ],
     find: [],
-    get: [],
+    get: [  ],
     create: [],
     update: [],
     patch: [],
