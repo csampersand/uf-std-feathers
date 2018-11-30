@@ -20,8 +20,14 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
-
-        const id = context.data.author;
+        var id;
+        // When generating dummy data through script give the
+        if(context.params.provider == undefined){
+            id = context.data.author;
+        }
+        else{
+            id = user._id;
+        }
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
