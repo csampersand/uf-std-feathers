@@ -4,14 +4,10 @@
             <a class="nav-link" href="">Account</a>
         </li>
     </div>
-    <div v-else-if="!user">
-        <li class="nav-item">
-            <a class="nav-link" href="">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">Sign Up</a>
-        </li>
-    </div>
+    <form v-else class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Register</button>
+    </form>
 </template>
 
 <script>
