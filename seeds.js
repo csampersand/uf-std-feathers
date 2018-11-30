@@ -70,6 +70,16 @@ async function seed(name, data) {
         public:"false",
         isAdmin:"false",
         password:"secret"
+    },
+    {
+        email:"admin@gmail.com",
+        fname:"Travis",
+        lname: "Scott",
+        gradYear:"2020",
+        bio:capitalize(faker.lorem.words(random(3, 7))),
+        public:"true",
+        isAdmin:"true",
+        password:"secret"
     }
     ]);
 
