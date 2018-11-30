@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Foo from './components/Foo.vue'
+import Navbar from './components/Navbar.vue'
+import AuthLinks from './components/AuthLinks.vue'
+
+Vue.component('Navbar', Navbar);
+Vue.component('AuthLinks', AuthLinks);
 
 window.onload = () => {
     // VUE ROUTING
