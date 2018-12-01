@@ -1,13 +1,13 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-const { addMajor } = require('../../hooks/add-majors')
+const { processMajor } = require('../../hooks/process-majors')
 
 module.exports = {
   before: {
     all: [authenticate('jwt' )],
     find: [],
     get: [],
-    create: [  ],
+    create: [ processMajor() ],
     update: [],
     patch: [],
     remove: []
