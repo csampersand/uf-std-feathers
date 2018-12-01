@@ -1,4 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
+const populateMajors = require('../../hooks/populate-majors');
+
+const processUser = require('../../hooks/process-user');
 
 const {
   hashPassword, protect
@@ -9,20 +12,20 @@ module.exports = {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [ hashPassword() ],
-    update: [ hashPassword(),  authenticate('jwt') ],
-    patch: [ hashPassword(),  authenticate('jwt') ],
+    create: [ hashPassword(), processUser()],
+    update: [ hashPassword(),  authenticate('jwt'),processUser() ],
+    patch: [ hashPassword(),  authenticate('jwt'),processUser() ],
     remove: [ authenticate('jwt') ]
   },
 
   after: {
-    all: [ 
+    all: [
       // Make sure the password field is never sent to the client
       // Always must be the last hook
       protect('password')
     ],
     find: [],
-    get: [],
+    get: [ populateMajors() ],
     create: [],
     update: [],
     patch: [],
