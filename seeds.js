@@ -13,14 +13,20 @@ const app = require("./src/server/app");
 
 
 async function seed(name, data) {
-    console.log(data.length + ' ' + name);
+    console.log(name);
     const service = app.service(name);
-    await service.Model.remove({});
     return service.create(data);
   }
 
   async function main() {
-    const users = await seed('users', [
+    //Clean database
+    const userService = app.service('users');
+    const postService = app.service('posts');
+    await userService.Model.remove({});
+    await postService.Model.remove({});
+
+    var createdUsers = [];
+    const users = [
       {
         email:"carlos@gmail.com",
         fname:"Carlos",
@@ -81,14 +87,20 @@ async function seed(name, data) {
         isAdmin:"true",
         password:"secret"
     }
-    ]);
+    ];
+
+    // // Create each user
+    for(var i = 0;i < users.length;i++){
+        createdUsers.push(await seed('users', users[i]));
+    }
+    console.log("\n Users: ", createdUsers);
 
     for(var i = 0; i < 20;i++){
         var post = await seed('posts',
         {
             title: capitalize(faker.lorem.words(random(3, 7))),
             body: capitalize(faker.lorem.words(random(3, 7))),
-            author: shuffle(users)[0]._id,
+            author: shuffle(createdUsers)[0]._id,
         // comments:[]
     }
     );

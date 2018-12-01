@@ -21,10 +21,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         // The post body
         const body = context.data.body;
         var id;
-        // When generating dummy data through script give the
+
+        // When generating dummy data through script give allow the script to give the user id
         if(context.params.provider == undefined){
             id = context.data.author;
         }
+        // In all other cases the user id will be the one in the browser session
         else{
             id = user._id;
         }
