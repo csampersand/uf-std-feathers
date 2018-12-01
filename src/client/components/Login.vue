@@ -1,5 +1,45 @@
+<script>
+
+import * as services from '../services'
+
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
+            error: false
+        }
+    },
+    methods: {
+        login() {
+            services.client.authenticate({
+                strategy: 'local',
+                email: this.email,
+                password: this.password
+            })
+            .then(response => {
+                console.log('Authenticated!', response);
+                return services.client.passport.verifyJWT(response.accessToken);
+            })
+            .then(payload => {
+                console.log('JWT Payload', payload);
+                return services.client.service('users').get(payload.userId);
+            })
+            .then(user => {
+                services.client.set('user', user);
+                console.log('User', services.client.get('user'));
+            })
+            .catch(function(error){
+                console.error('Error authenticating!', error);
+            });
+        }
+    }
+}
+
+</script>
+
 <template>
-  <div class="body-signup">
+  <div class="body-signup" id="authenticate">
     <form action="/#" style="border:1px solid #ccc">
 
     <div class="container">
@@ -9,14 +49,14 @@
       <hr class="hr-signup">
 
       <label for="email"><b>UFL EMAIL</b></label>
-      <input class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+      <input v-model="email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
 
       <label for="psw"><b>PASSWORD</b></label>
-      <input class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
+      <input v-model="password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
 
       <div class="clearfix">
         <button type="button" class="cancel-button"><b>CANCEL</b></button>
-        <button type="submit" class="signup-button"><b>LOGIN</b></button>
+        <button v-on:click="login" class="signup-button"><b>LOGIN</b></button>
       </div>
 
     </div>

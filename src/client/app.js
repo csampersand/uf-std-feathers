@@ -1,34 +1,8 @@
-const feathers = require('@feathersjs/feathers');
-const rest = require('@feathersjs/rest-client');
-const auth = require('@feathersjs/authentication-client');
+import Vue from 'vue'
+import App from './components/App.vue'
+import router from './router'
 
-const superagent = require('superagent');
-const localStorage = require('localstorage-memory');
-
-const client = feathers();
-
-import './router.js'
-
-client.configure(rest('http://localhost:3030').superagent(superagent))
-    .configure(auth({ storage: localStorage }));
-
-feathersClient.authenticate({
-    strategy: 'local',
-    email: 'rahul.d.patel352@gmail.com',
-    password: 'secret'
-})
-    .then(response => {
-        console.log('Authenticated!', response);
-        return feathersClient.passport.verifyJWT(response.accessToken);
-    })
-    .then(payload => {
-        console.log('JWT Payload', payload);
-        return feathersClient.service('users').get(payload.userId);
-    })
-    .then(user => {
-        feathersClient.set('user', user);
-        console.log('User', feathersClient.get('user'));
-    })
-    .catch(function (error) {
-        console.error('Error authenticating!', error);
-    });
+const app = new Vue({
+    router,
+    ...App
+}).$mount('#app');
