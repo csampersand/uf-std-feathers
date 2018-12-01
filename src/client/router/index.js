@@ -2,15 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Foo from '../components/Foo.vue'
-import Navbar from '../components/Navbar/Navbar.vue'
-import AuthLinks from '../components/Navbar/AuthLinks.vue'
-import LoginPage from '../components/Auth/LoginPage.vue'
-import RegisterPage from '../components/Auth/RegisterPage.vue'
+import Navbar from '../components/Navbar.vue'
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
 
 Vue.component('Navbar', Navbar);
-Vue.component('AuthLinks', AuthLinks);
-Vue.component('LoginPage', LoginPage);
-Vue.component('RegisterPage', RegisterPage);
+Vue.component('Login', Login);
+Vue.component('Register', Register);
 
 // VUE ROUTING
 
@@ -32,8 +30,8 @@ export default new VueRouter({
         { path: '/bar', component: Bar },
 
         // Auth pages
-        { path: '/login', component: LoginPage },
-        { path: '/register', component: RegisterPage },
+        { path: '/login', component: Login },
+        { path: '/register', component: Register },
 
 
         // Default page is root path

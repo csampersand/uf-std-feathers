@@ -1,35 +1,40 @@
 <script>
 
-// let authenticate = () => {
-//     feathersClient.authenticate({
-//         strategy: 'local',
-//         email: 'admin@feathersjs.com',
-//         password: 'admin'
-//     })
-//     .then(response => {
-//         console.log('Authenticated!', response);
-//         return feathersClient.passport.verifyJWT(response.accessToken);
-//     })
-//     .then(payload => {
-//         console.log('JWT Payload', payload);
-//         return feathersClient.service('users').get(payload.userId);
-//     })
-//     .then(user => {
-//         feathersClient.set('user', user);
-//         console.log('User', feathersClient.get('user'));
-//     })
-//     .catch(function(error){
-//         console.error('Error authenticating!', error);
-//     });
-// }
+import * as services from '../services'
 
-// var authenticate = new Vue({
-//     el: '#authenticate',
-//     data: {
-//         email: '',
-//         password: ''
-//     }
-// })
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
+            error: false
+        }
+    },
+    methods: {
+        login() {
+            services.client.authenticate({
+                strategy: 'local',
+                email: this.email,
+                password: this.password
+            })
+            .then(response => {
+                console.log('Authenticated!', response);
+                return services.client.passport.verifyJWT(response.accessToken);
+            })
+            .then(payload => {
+                console.log('JWT Payload', payload);
+                return services.client.service('users').get(payload.userId);
+            })
+            .then(user => {
+                services.client.set('user', user);
+                console.log('User', services.client.get('user'));
+            })
+            .catch(function(error){
+                console.error('Error authenticating!', error);
+            });
+        }
+    }
+}
 
 </script>
 
@@ -44,14 +49,14 @@
       <hr class="hr-signup">
 
       <label for="email"><b>UFL EMAIL</b></label>
-      <input class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" v-model="email" required>
+      <input v-model="email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
 
       <label for="psw"><b>PASSWORD</b></label>
-      <input class="input-signup" type="password" placeholder="Enter Password" name="psw" v-model="password" required>
+      <input v-model="password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
 
       <div class="clearfix">
         <button type="button" class="cancel-button"><b>CANCEL</b></button>
-        <button type="submit" class="signup-button"><b>LOGIN</b></button>
+        <button v-on:click="login" class="signup-button"><b>LOGIN</b></button>
       </div>
 
     </div>
