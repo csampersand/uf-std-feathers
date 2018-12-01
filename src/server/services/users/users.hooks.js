@@ -23,7 +23,7 @@ module.exports = {
       protect('password')
     ],
     find: [],
-    get: [  ],
+    get: [ populateMajors() ],
     create: [],
     update: [],
     patch: [],
