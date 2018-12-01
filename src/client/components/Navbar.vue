@@ -6,15 +6,29 @@ export default {
     data() {
         return {
             loggedIn: !!localStorage.getItem("feathers-jwt"),
+            user: this.getUser()
         }
+    },
+    created() {
+        this.getUser();
     },
     methods: {
         logout() {
             services.client.logout();
             this.loggedIn = false;
+        },
+        getUser() {
+            // services.client.passport.getJWT();
         }
     }
 }
+
+services.client.set('user', {
+    fname: 'test',
+    lname: 'test'
+});
+console.log('Navbar has ' + services.client.get('user'));
+services.client.service('users').find().then(items => console.log('find()', items));
 
 </script>
 
