@@ -8,7 +8,6 @@ const app = require("./src/server/app");
 
 
 async function seed(name, data) {
-    console.log(name);
     const service = app.service(name);
     return service.create(data);
   }
@@ -147,7 +146,6 @@ async function seed(name, data) {
           return users;
     })
     .then(async function(users){
-        console.log(users);
 
             for(var i = 0;i < users.length;i++){
                 createdUsers.push(await seed('users', users[i]));

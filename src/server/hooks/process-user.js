@@ -25,7 +25,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const password = user.password;
         const major = user.major;
 
-        console.log("Hooks users major: ", user.major);
         // Override the user data (so that people can't become admin)
         context.data = {
             email,
