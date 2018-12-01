@@ -23,7 +23,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const gradYear = user.gradYear;
         const bio = user.bio;
         const password = user.password;
+        const major = user.major;
 
+        console.log("Hooks users major: ", user.major);
         // Override the user data (so that people can't become admin)
         context.data = {
             email,
@@ -33,7 +35,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             bio,
             public: publicAttr,
             isAdmin: adminBool,
-            password
+            password,
+            major
             };
 
         // Best practice: hooks should always return the context

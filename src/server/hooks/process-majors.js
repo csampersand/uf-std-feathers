@@ -3,8 +3,10 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const { data } = context;
 
         // Throw an error if user not an admin
-        if (!context.params.user.isAdmin) {
-            throw new Error('Must be admin to add new major');
+        if(context.params.provider != undefined){
+            if (!context.params.user.isAdmin) {
+                throw new Error('Must be admin to add new major');
+            }
         }
 
         // Override the original data (so that people can't submit additional stuff)

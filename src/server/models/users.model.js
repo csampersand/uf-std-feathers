@@ -15,7 +15,7 @@ module.exports = function (app) {
     public: { type: Boolean, default: false },
     following: { type: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'Users'}], default: undefined },
     isAdmin: { type: Boolean, default: false },
-    major: { type: [{ type: mongooseClient.Schema.Types.ObjectId, ref: 'Majors'}], required:true}
+    major: { type: mongooseClient.Schema.Types.ObjectId, ref: 'Majors', required:true}
 
   }, {
     timestamps: true
