@@ -20,13 +20,23 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
+        var id;
+
+        // When generating dummy data through script give allow the script to give the user id
+        if(context.params.provider == undefined){
+            id = context.data.author;
+        }
+        // In all other cases the user id will be the one in the browser session
+        else{
+            id = user._id;
+        }
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             title,
             body,
             // Set the user id
-            author: user._id,
+            author: id,
             comments: []
         };
 
