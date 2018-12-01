@@ -1,5 +1,40 @@
+<script>
+
+// let authenticate = () => {
+//     feathersClient.authenticate({
+//         strategy: 'local',
+//         email: 'admin@feathersjs.com',
+//         password: 'admin'
+//     })
+//     .then(response => {
+//         console.log('Authenticated!', response);
+//         return feathersClient.passport.verifyJWT(response.accessToken);
+//     })
+//     .then(payload => {
+//         console.log('JWT Payload', payload);
+//         return feathersClient.service('users').get(payload.userId);
+//     })
+//     .then(user => {
+//         feathersClient.set('user', user);
+//         console.log('User', feathersClient.get('user'));
+//     })
+//     .catch(function(error){
+//         console.error('Error authenticating!', error);
+//     });
+// }
+
+// var authenticate = new Vue({
+//     el: '#authenticate',
+//     data: {
+//         email: '',
+//         password: ''
+//     }
+// })
+
+</script>
+
 <template>
-  <div class="body-signup">
+  <div class="body-signup" id="authenticate">
     <form action="/#" style="border:1px solid #ccc">
 
     <div class="container">
@@ -9,10 +44,10 @@
       <hr class="hr-signup">
 
       <label for="email"><b>UFL EMAIL</b></label>
-      <input class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+      <input class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" v-model="email" required>
 
       <label for="psw"><b>PASSWORD</b></label>
-      <input class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
+      <input class="input-signup" type="password" placeholder="Enter Password" name="psw" v-model="password" required>
 
       <div class="clearfix">
         <button type="button" class="cancel-button"><b>CANCEL</b></button>
