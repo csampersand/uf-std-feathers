@@ -5,8 +5,12 @@
         </li>
     </div>
     <form v-else class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Register</button>
+      <router-link to="/login">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+      </router-link>
+      <router-link to="/register">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Register</button>
+      </router-link>
     </form>
 </template>
 

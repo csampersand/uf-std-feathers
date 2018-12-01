@@ -2,11 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Foo from './components/Foo.vue'
-import Navbar from './components/Navbar.vue'
-import AuthLinks from './components/AuthLinks.vue'
+import Navbar from './components/Navbar/Navbar.vue'
+import AuthLinks from './components/Navbar/AuthLinks.vue'
+import LoginPage from './components/Auth/LoginPage.vue'
+import RegisterPage from './components/Auth/RegisterPage.vue'
 
 Vue.component('Navbar', Navbar);
 Vue.component('AuthLinks', AuthLinks);
+Vue.component('LoginPage', LoginPage);
+Vue.component('RegisterPage', RegisterPage);
 
 window.onload = () => {
     // VUE ROUTING
@@ -25,8 +29,17 @@ window.onload = () => {
     // `Vue.extend()`, or just a component options object.
     // We'll talk about nested routes later.
     const routes = [
+        { path: '/', component: Foo},
         { path: '/foo', component: Foo },
-        { path: '/bar', component: Bar }
+        { path: '/bar', component: Bar },
+
+        // Auth pages
+        { path: '/login', component: LoginPage },
+        { path: '/register', component: RegisterPage },
+
+
+        // Default page is root path
+        { path: '*', redirect: '/' }
     ]
 
     // 3. Create the router instance and pass the `routes` option
