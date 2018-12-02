@@ -1,38 +1,45 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
+Vue.use(Router)
+
+import * as services from '../services'
 import Foo from '../components/Foo.vue'
 import Navbar from '../components/Navbar.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import Sidebar from '../components/Sidebar.vue'
 
 Vue.component('Navbar', Navbar);
 Vue.component('Login', Login);
 Vue.component('Register', Register);
+Vue.component('Sidebar', Sidebar);
 
 // VUE ROUTING
 
-// 0. If using a module system (e.g. via vue-cli), import Vue and VueRouter
-// and then call `Vue.use(VueRouter)`.
-Vue.use(VueRouter)
+// 0. If using a module system (e.g. via vue-cli), import Vue and Router
+// and then call `Vue.use(Router)`.
 
 // 1. Define route components.
 // These can be imported from other files
-const Bar = { template: '<div>bar</div>' }
+const About = { template: '<h1>About UF-STD</h1>'}
+const Explore = { template: '<h1>Explore</h1>' }
+const Feed = { template: '<h1>Feed</h1>' }
+const Profile = { template: '<h1>Profile</h1>' }
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
-export default new VueRouter({
+export default new Router({
     routes: [
-        { path: '/', component: Foo},
-        { path: '/foo', component: Foo },
-        { path: '/bar', component: Bar },
+        { path: '/', component: About},
+        { path: '/explore', component: Explore },
+        { path: '/feed', component: Feed },
+        { path: '/profile', component: Profile },
 
         // Auth pages
         { path: '/login', component: Login },
         { path: '/register', component: Register },
-
 
         // Default page is root path
         { path: '*', redirect: '/' }

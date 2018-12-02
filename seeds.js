@@ -157,13 +157,20 @@ async function seed(name, data) {
 
         console.log("\n Users: ", createdUsers);
 
+        // Making 20 posts and assigning them random users as creators
         for(var i = 0; i < 20;i++){
+            // Create a random amount of comments for each post
+
             var post = await seed('posts',
             {
                 title: capitalize(faker.lorem.words(random(3, 7))),
                 body: capitalize(faker.lorem.words(random(3, 7))),
                 author: shuffle(createdUsers)[0]._id,
-            // comments:[]
+                comments:Array.from(Array(random(5)), () => ({
+                    text: capitalize(faker.lorem.words(random(3, 7))),
+                    postedBy: shuffle(createdUsers)[0]._id
+                })),
+                flag:shuffle([true,false])[0]
             }
             );
 
