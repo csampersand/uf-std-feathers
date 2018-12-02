@@ -20,8 +20,15 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
+
+        const flag = context.data.flag;
+
         var _id;
         var comments = [];
+
+        if(flag == undefined){
+            flag = false;
+        }
 
         // When generating dummy data through script give allow the script to give the user id
         if(context.params.provider == undefined){
@@ -48,7 +55,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             body,
             // Set the user id
             author: _id,
-            comments
+            comments,
+            flag
         };
 
         // Best practice: hooks should always return the context
