@@ -3,42 +3,8 @@
 import * as services from '../services'
 
 export default {
-    data() {
-        return {
-            loggedIn: !!localStorage.getItem("feathers-jwt"),
-            user: {}
-        }
-    },
-    created() {
-        this.getUser();
-    },
-    methods: {
-        getUser() {
-            services.client.authenticate()
-                .then(response => {
-                    return services.client.passport.verifyJWT(response.accessToken);
-                })
-                .then(payload => {
-                    return services.client.service('users').get(payload.userId);
-                })
-                .then(user => {
-                    services.client.set('user', user);
-                    this.user = services.client.get('user');
-                })
-                .catch(function(error){
-                    console.error('Error authenticating!', error);
-                    this.$router.push('/login');
-                });
-        }
-    }
+    props: ['user']
 }
-
-// services.client.set('user', {
-//     fname: 'test',
-//     lname: 'test'
-// });
-console.log('Navbar has ' + services.client.get('user'));
-services.client.service('users').find().then(items => console.log('find()', items));
 
 </script>
 
@@ -52,14 +18,14 @@ services.client.service('users').find().then(items => console.log('find()', item
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <router-link class="nav-link" to="/foo">{{ user.fname }}</router-link>
+                    <router-link class="nav-link" to="/foo">{{ user ? user.fname : 'Foo' }}</router-link>
                 </li>
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/bar">Bar</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <div v-if="loggedIn">
+                <div v-if="user">
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Account
