@@ -3,7 +3,7 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        const { data, method } = context;
+        const { id, app, data, method } = context;
 
         // Throw an error if we didn't get a title
         if (!data.title) {
@@ -20,33 +20,34 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
-        var id;
+        var _id;
 
         // When generating dummy data through script give allow the script to give the user id
         if(context.params.provider == undefined){
-            id = context.data.author;
+            _id = context.data.author;
         }
         // In all other cases the user id will be the one in the browser session
         else{
-            id = user._id;
+            _id = user._id;
         }
 
-        /*var comments = [];
+        var comments = [];
+        const post = await app.service('posts').get(id);
 
         if (method === 'update') {
-            comments = data.comments;
+            comments = post.comments;
         }
-        else if (method === 'create')
-            comments = []
-        }*/
+        else if (method === 'create'){
+            comments = [];
+        }
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
             title,
             body,
             // Set the user id
-            author: id,
-            comments: []
+            author: _id,
+            comments: comments
         };
 
         // Best practice: hooks should always return the context
