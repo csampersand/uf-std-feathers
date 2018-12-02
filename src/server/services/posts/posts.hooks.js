@@ -4,6 +4,8 @@ const processPost = require('../../hooks/process-post');
 
 const populateUser = require('../../hooks/populate-user');
 
+const processComment = require('../../hooks/process-comments');
+
 module.exports = {
   before: {
     all: [ authenticate('jwt' ) ],
@@ -11,7 +13,7 @@ module.exports = {
     get: [],
     create: [processPost()],
     update: [processPost()],
-    patch: [processPost()],
+    patch: [processComment()],
     remove: []
   },
 

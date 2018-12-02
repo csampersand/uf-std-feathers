@@ -3,7 +3,7 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        const { data } = context;
+        const { data, method } = context;
 
         // Throw an error if we didn't get a title
         if (!data.title) {
@@ -30,6 +30,15 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         else{
             id = user._id;
         }
+
+        /*var comments = [];
+
+        if (method === 'update') {
+            comments = data.comments;
+        }
+        else if (method === 'create')
+            comments = []
+        }*/
 
         // Override the original data (so that people can't submit additional stuff)
         context.data = {
