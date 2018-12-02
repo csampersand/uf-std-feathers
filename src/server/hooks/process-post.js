@@ -37,7 +37,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             body,
             // Set the user id
             author: id,
-            comments: []
+            comments
         };
 
         // Best practice: hooks should always return the context

@@ -1,21 +1,19 @@
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        const { id, data } = context;
+        const { id, data, app } = context;
         
+        const post = await app.service('posts').get(id);
+
         var user = context.params.user; 
         const userComment = {
             comment: data.comment,
-            postedBy: user.id
+            postedBy: user._id
         }
-        var currComments = context.data.comments;
+
+        var currComments = post.comments;
         currComments.push(userComment);
-
-        post = await app.service('posts').get(id, params);
-
-        // Add comment to the post
-        post.update = {
-            comments: currComments,
-        };
+        
+        await app.service('posts').update({_id: id}, {$set: {comments: currComments}});
 
         // Best practice: hooks should always return the context
         return context;
