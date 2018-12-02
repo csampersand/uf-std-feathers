@@ -4,6 +4,8 @@ const processPost = require('../../hooks/process-post');
 
 const populateUser = require('../../hooks/populate-user');
 
+const checkUserIsAdmin = require('../../hooks/check-user-admin');
+
 module.exports = {
   before: {
     all: [ authenticate('jwt' ) ],
@@ -12,7 +14,7 @@ module.exports = {
     create: [processPost()],
     update: [processPost()],
     patch: [processPost()],
-    remove: []
+    remove: [checkUserIsAdmin()]
   },
 
   after: {
