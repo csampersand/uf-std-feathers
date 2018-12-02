@@ -3,7 +3,7 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        const { data, method } = context;
+        const { id, app, data, method } = context;
 
         // Throw an error if we didn't get a title
         if (!data.title) {
@@ -20,22 +20,23 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
-        var id;
+        var _id;
         var comments = [];
 
         // When generating dummy data through script give allow the script to give the user id
         if(context.params.provider == undefined){
-            id = context.data.author;
+            _id = context.data.author;
             comments = data.comments;
         }
         // In all other cases the user id will be the one in the browser session
         else{
-            id = user._id;
+            _id = user._id;
         }
 
-
         if (method === 'update') {
-            comments = data.comments;
+            const post = await app.service('posts').get(id);
+
+            comments = post.comments;
         }
         else if (method === 'create' && context.params.provider != undefined){
             comments = []
@@ -46,7 +47,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             title,
             body,
             // Set the user id
-            author: id,
+            author: _id,
             comments
         };
 
