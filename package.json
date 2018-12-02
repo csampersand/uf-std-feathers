@@ -49,8 +49,8 @@
     "@feathersjs/express": "^1.2.7",
     "compression": "^1.7.3",
     "cors": "^2.8.5",
-    "faker": "^4.1.0",
     "css-loader": "^1.0.1",
+    "faker": "^4.1.0",
     "feathers-mongoose": "^6.2.0",
     "helmet": "^3.15.0",
     "localstorage-memory": "^1.0.3",
@@ -60,6 +60,7 @@
     "serve-favicon": "^2.5.0",
     "superagent": "^4.0.0",
     "vue": "^2.5.17",
+    "vue-feathers": "^0.1.0",
     "vue-router": "^3.0.2",
     "winston": "^3.1.0"
   },
