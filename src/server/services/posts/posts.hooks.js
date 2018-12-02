@@ -13,7 +13,7 @@ module.exports = {
     get: [],
     create: [processPost()],
     update: [processPost()],
-    patch: [],
+    patch: [processComment()],
     remove: []
   },
 
@@ -23,7 +23,7 @@ module.exports = {
     get: [],
     create: [],
     update: [],
-    patch: [processComment()],
+    patch: [],
     remove: []
   },
 
