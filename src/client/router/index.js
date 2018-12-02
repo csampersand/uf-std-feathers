@@ -22,26 +22,24 @@ Vue.component('Sidebar', Sidebar);
 
 // 1. Define route components.
 // These can be imported from other files
-const Bar = { template: '<div>bar</div>' }
+const About = { template: '<h1>About UF-STD</h1>'}
+const Explore = { template: '<h1>Explore</h1>' }
+const Feed = { template: '<h1>Feed</h1>' }
+const Profile = { template: '<h1>Profile</h1>' }
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
 export default new Router({
     routes: [
-        { path: '/', component: Foo},
-        { path: '/foo', component: Foo },
-        { path: '/bar', component: Bar },
+        { path: '/', component: About},
+        { path: '/explore', component: Explore },
+        { path: '/feed', component: Feed },
+        { path: '/profile', component: Profile },
 
         // Auth pages
         { path: '/login', component: Login },
         { path: '/register', component: Register },
-        { path: '/logout',
-            beforeEnter(to, from, next) {
-                services.client.logout();
-                next('/login');
-            }},
-
 
         // Default page is root path
         { path: '*', redirect: '/' }

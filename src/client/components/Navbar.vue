@@ -17,23 +17,23 @@ export default {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <router-link class="nav-link" to="/foo">{{ user ? user.fname : 'Foo' }}</router-link>
+                <li class="nav-item">
+                    <router-link v-if="user" class="nav-link" to="/feed">Your Feed</router-link>
                 </li>
-                <li class="nav-item active">
-                    <router-link class="nav-link" to="/bar">Bar</router-link>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/explore">Explore</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <div v-if="user">
                   <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Account
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Profile</a>
+                      <router-link class="dropdown-item" to="/profile" href="#">Profile</router-link>
                       <div class="dropdown-divider"></div>
-                      <router-link class="dropdown-item" to="/logout">Logout</router-link>
+                      <a class="dropdown-item" v-on:click="$emit('logout')">Logout</a>
                     </div>
                   </li>
                 </div>
@@ -56,5 +56,9 @@ export default {
 }
 .pull-left {
     left:0;
+}
+.router-active {
+    font-weight: bold;
+    color: #FFFFFF;
 }
 </style>

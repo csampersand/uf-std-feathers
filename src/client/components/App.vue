@@ -29,7 +29,7 @@
                         this.$router.push('/login');
                     });
             },
-            onLoginAttempt(credentials) {
+            login(credentials) {
                 services.client.authenticate({
                     strategy: 'local',
                     email: credentials.email,
@@ -45,10 +45,16 @@
                         services.client.set('user', user);
                         console.log('Authenticated', user);
                         this.user = services.client.get('user');
+                        this.$router.push('/');
                     })
                     .catch(error => {
                         console.error('Error authenticating!', error);
                     });
+            },
+            logout() {
+                this.user = null,
+                services.client.logout()
+                this.$router.push('/login');
             }
         }
     }
@@ -56,12 +62,15 @@
 
 <template>
     <div id="app" class="toggled">
-        <navbar v-bind:user="user" ></navbar>
+        <navbar
+            v-bind:user="user"
+            v-on:logout="logout"></navbar>
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
         <div id="wrapper" class="toggled">
             <sidebar v-if="user"></sidebar>
-            <router-view v-on:login-attempt="onLoginAttempt" id="page-content-wrapper" class="container" tag="div"></router-view>
+            <router-view id="page-content-wrapper" class="container" tag="div"
+                v-on:login="login"></router-view>
         </div>
     </div>
 </template>
