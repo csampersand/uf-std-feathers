@@ -11,7 +11,8 @@ module.exports = function (app) {
     title: { type: String, required: true },
     body: { type: String, required: true },
     author: { type: mongooseClient.Schema.Types.ObjectId, ref: 'Users' },
-    comments: [{ text: String, postedBy: { type: mongooseClient.Schema.Types.ObjectId, ref: 'Users' } }]
+    comments: [{ text: String, postedBy: { type: mongooseClient.Schema.Types.ObjectId, ref: 'Users' } }],
+    flag:{type: Boolean, default: false}
   }, {
     timestamps: true
   });

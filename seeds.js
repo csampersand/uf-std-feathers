@@ -169,7 +169,8 @@ async function seed(name, data) {
                 comments:Array.from(Array(random(5)), () => ({
                     text: capitalize(faker.lorem.words(random(3, 7))),
                     postedBy: shuffle(createdUsers)[0]._id
-                }))
+                })),
+                flag:shuffle([true,false])[0]
             }
             );
 
