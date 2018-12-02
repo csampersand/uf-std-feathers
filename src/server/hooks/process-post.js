@@ -5,6 +5,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
         const { id, app, data, method } = context;
 
+        const post = await app.service('posts').get(id);
+
         // Throw an error if we didn't get a title
         if (!data.title) {
             throw new Error('Post must have a title');
@@ -12,6 +14,13 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         // Throw an error if we didn't get a body
         if (!data.body) {
             throw new Error('Post must have a body');
+        }
+
+        //Throw an error if user try's to update someone else's post
+        if (method === 'update') {
+            if(post.author._id != context.params.user._id && !context.params.user.isAdmin){
+                throw new Error('Cannont modify another users post');
+            }
         }
 
         // The authenticated user
@@ -40,6 +49,11 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             _id = user._id;
         }
 
+<<<<<<< HEAD
+        var comments = [];
+
+=======
+>>>>>>> c3b22935a0ab1cc14ea37e8b9069cc9e36e8fcd5
         if (method === 'update') {
             const post = await app.service('posts').get(id);
 
