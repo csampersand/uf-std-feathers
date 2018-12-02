@@ -5,6 +5,7 @@ const processPost = require('../../hooks/process-post');
 const populateUser = require('../../hooks/populate-user');
 
 const processComment = require('../../hooks/process-comments');
+const checkUserIsAdmin = require('../../hooks/check-user-admin');
 
 module.exports = {
   before: {
@@ -14,7 +15,7 @@ module.exports = {
     create: [processPost()],
     update: [processPost()],
     patch: [processComment()],
-    remove: []
+    remove: [checkUserIsAdmin()]
   },
 
   after: {
