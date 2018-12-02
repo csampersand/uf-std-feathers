@@ -6,27 +6,37 @@ export default {
     data() {
         return {
             loggedIn: !!localStorage.getItem("feathers-jwt"),
-            user: this.getUser()
+            user: {}
         }
     },
     created() {
         this.getUser();
     },
     methods: {
-        logout() {
-            services.client.logout();
-            this.loggedIn = false;
-        },
         getUser() {
-            // services.client.passport.getJWT();
+            services.client.authenticate()
+                .then(response => {
+                    return services.client.passport.verifyJWT(response.accessToken);
+                })
+                .then(payload => {
+                    return services.client.service('users').get(payload.userId);
+                })
+                .then(user => {
+                    services.client.set('user', user);
+                    this.user = services.client.get('user');
+                })
+                .catch(function(error){
+                    console.error('Error authenticating!', error);
+                    this.$router.push('/login');
+                });
         }
     }
 }
 
-services.client.set('user', {
-    fname: 'test',
-    lname: 'test'
-});
+// services.client.set('user', {
+//     fname: 'test',
+//     lname: 'test'
+// });
 console.log('Navbar has ' + services.client.get('user'));
 services.client.service('users').find().then(items => console.log('find()', items));
 
@@ -42,7 +52,7 @@ services.client.service('users').find().then(items => console.log('find()', item
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <router-link class="nav-link" to="/foo">Foo</router-link>
+                    <router-link class="nav-link" to="/foo">{{ user.fname }}</router-link>
                 </li>
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/bar">Bar</router-link>
@@ -57,7 +67,7 @@ services.client.service('users').find().then(items => console.log('find()', item
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="#">Profile</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#" v-on:click="logout">Logout</a>
+                      <router-link class="dropdown-item" to="/logout">Logout</router-link>
                     </div>
                   </li>
                 </div>

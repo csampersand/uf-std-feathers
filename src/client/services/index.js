@@ -6,9 +6,9 @@ import localStorage from 'localstorage-memory';
 
 export const client = feathers()
     .configure(rest('http://localhost:3030').superagent(superagent))
-    .configure(auth({ storage: window.localStorage, idField: '_id' }));
+    .configure(auth({ storage: window.localStorage }));
 
-client.authenticate().then(() => console.log('Authenticated user: ' + client.get('user')))
+client.authenticate();
 
 export const postService = client.service('posts');
 export const userService = client.service('users');
