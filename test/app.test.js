@@ -3,9 +3,9 @@ const rp = require('request-promise');
 const url = require('url');
 const app = require('../src/app');
 
-const port = app.get('port') || 3030;
+const port = process.env.PORT || 3030;
 const getUrl = pathname => url.format({
-  hostname: app.get('host') || 'localhost',
+  hostname: window.location.href,
   protocol: 'http',
   port,
   pathname
