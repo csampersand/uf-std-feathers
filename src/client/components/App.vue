@@ -46,11 +46,20 @@
                         services.client.set('user', user);
                         console.log('Authenticated', user);
                         this.user = services.client.get('user');
-                        swal("Logged in!", "You were logged in successfully.", "success", {
-                            buttons: false,
-                            timer: 2000
-                        });
-                        this.$router.push('/');
+                        if (credentials.registered === true)
+                        {
+                            swal("Registered successfully!", "You are signed up.", "success", {
+                                buttons: false,
+                                timer: 2000
+                            });
+                        }
+                        else {
+                            swal("Logged in!", "You were logged in successfully.", "success", {
+                                buttons: false,
+                                timer: 2000
+                            });
+                        }
+                        this.$router.push('/feed');
                     })
                     .catch(error => {
                         swal("Uh oh!", "We couldn't log you in. Please try again.", "error", {
