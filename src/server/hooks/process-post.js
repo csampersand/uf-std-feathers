@@ -5,7 +5,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
         const { id, app, data, method } = context;
 
-        const post = await app.service('posts').get(id);
 
         // Throw an error if we didn't get a title
         if (!data.title) {
@@ -50,6 +49,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         }
 
         if (method === 'update') {
+            const post = await app.service('posts').get(id);
             comments = post.comments;
         }
         else if (method === 'create' && context.params.provider != undefined){
