@@ -4,13 +4,13 @@ const processMajor = require('../../hooks/process-majors')
 
 module.exports = {
   before: {
-    all: [authenticate('jwt' )],
+    all: [],
     find: [],
     get: [],
-    create: [ processMajor() ],
-    update: [],
-    patch: [],
-    remove: []
+    create: [ processMajor(), authenticate('jwt' ) ],
+    update: [authenticate('jwt' )],
+    patch: [authenticate('jwt' )],
+    remove: [authenticate('jwt' )]
   },
 
   after: {

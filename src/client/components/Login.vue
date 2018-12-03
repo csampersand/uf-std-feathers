@@ -9,30 +9,6 @@ export default {
             password: '',
             error: false
         }
-    },
-    methods: {
-        login() {
-            services.client.authenticate({
-                strategy: 'local',
-                email: this.email,
-                password: this.password
-            })
-            .then(response => {
-                console.log('Authenticated!', response);
-                return services.client.passport.verifyJWT(response.accessToken);
-            })
-            .then(payload => {
-                console.log('JWT Payload', payload);
-                return services.client.service('users').get(payload.userId);
-            })
-            .then(user => {
-                services.client.set('user', user);
-                console.log('User', services.client.get('user'));
-            })
-            .catch(function(error){
-                console.error('Error authenticating!', error);
-            });
-        }
     }
 }
 

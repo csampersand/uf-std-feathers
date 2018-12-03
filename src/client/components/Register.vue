@@ -1,6 +1,40 @@
+<script>
+    import * as services from '../services'
+    import swal from 'sweetalert';
+
+    export default {
+        data() {
+            return {
+                majors: [],
+                user: {},
+                errors: []
+            }
+        },
+        created() {
+            services.majorService.find().then(majors => this.majors = majors.data);
+        },
+        methods: {
+            register() {
+                services.userService.create(this.user).then(() => {
+                    services.client.set('user', this.user);
+                    this.$emit('login', {email: this.user.email, password: this.user.password, registered: true})
+                }).catch(error => {
+                    console.error("Error registering", error);
+                    console.log(Object.keys(error.errors));
+                    this.errors = error.errors;
+                    swal("Uh oh!", "We couldn't sign you up. Please try again.", "error", {
+                        buttons: false,
+                        timer: 2000
+                    });
+                })
+            }
+        }
+    }
+</script>
+
 <template>
 <div class="body-signup">
-  <form action="/#" style="border:1px solid #ccc">
+  <form style="border:1px solid #ccc" v-on:submit.prevent="register">
 
   <div class="container">
     <center>
@@ -8,38 +42,45 @@
     </center>
     <hr class="hr-signup">
 
-    <label for="first-name"><b>FIRST NAME</b></label>
-    <input class="input-signup" type="text" placeholder="Enter Your First Name" name="first-name" required>
+    <label v-bind:class="{ error: Object.keys(errors).includes('fname') }" for="fname"><b>FIRST NAME</b></label>
+    <input v-model="user.fname" class="input-signup" type="text" placeholder="Enter Your First Name" name="first-name" required>
 
-    <label for="last-name"><b>LAST NAME</b></label>
-    <input class="input-signup" type="text" placeholder="Enter Your Last Name" name="last-name" required>
+    <label v-bind:class="{ error: Object.keys(errors).includes('lname') }" for="lname"><b>LAST NAME</b></label>
+    <input v-model="user.lname" class="input-signup" type="text" placeholder="Enter Your Last Name" name="last-name" required>
 
-    <label for="major"><b>MAJOR OF STUDY</b></label>
+    <label v-bind:class="{ error: Object.keys(errors).includes('major') }" for="major"><b>MAJOR OF STUDY</b></label>
     <br>
-    <select class="selection">
+    <select v-model="user.major" class="selection">
       <option value="default">Please Select</option>
-      <option value="CS">Computer Science</option>
-      <option value="CpE">Computer Engineering</option>
-      <option value="EE">Electrical Engineering</option>
-      <option value="Mech">Mechanical Engineering</option>
+      <option v-for="major in majors" :value="major._id">{{ major.majorName }}</option>
+    </select>
+    <br>
+
+    <label v-bind:class="{ error: Object.keys(errors).includes('gradYear') }" for="gradYear"><b>Graduation Year</b></label>
+    <br>
+    <select v-model="user.gradYear" class="selection">
+      <option value="default">Please Select</option>
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
     </select>
     <br>
     <!-- <input class="input-signup" type="text" placeholder="Enter Your Major of Study" name="major" required> -->
 
-    <label for="email"><b>UFL EMAIL</b></label>
-    <input class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+    <label v-bind:class="{ error: Object.keys(errors).includes('email') }" for="email"><b>UFL EMAIL</b></label>
+    <input v-model="user.email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
 
-    <label for="psw"><b>PASSWORD</b></label>
-    <input class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
+    <label v-bind:class="{ error: Object.keys(errors).includes('password') }" for="password"><b>PASSWORD</b></label>
+    <input v-model="user.password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
 
-    <label for="psw-repeat"><b>CONFIRM PASSWORD</b></label>
-    <input class="input-signup" type="password" placeholder="Confirm Password" name="psw-repeat" required>
+    <label v-bind:class="{ error: Object.keys(errors).includes('bio') }" for="bio"><b>WRITE A SHORT BIOGRAPHY</b></label>
+    <textarea v-model="user.bio" class="input-signup" type="text" name="subject" placeholder="Write your life story..." style="height:200px"></textarea>
 
-    <label for="bio"><b>WRITE A SHORT BIOGRAPHY</b></label>
-    <textarea class="input-signup" type="text" name="subject" placeholder="Write your life story..." style="height:200px"></textarea>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Make my profile public.
+    <label v-bind:class="{ error: Object.keys(errors).includes('public') }" for="public">
+      <input v-model="user.public" type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Make my profile public.
     </label>
 
     <div class="clearfix">
@@ -130,5 +171,10 @@
   content: "";
   clear: both;
   display: table;
+}
+
+.error::after {
+    content: "*";
+    color: red;
 }
 </style>
