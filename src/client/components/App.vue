@@ -1,5 +1,6 @@
 <script>
     import * as services from '../services/'
+    import swal from 'sweetalert';
 
     export default {
         data() {
@@ -45,15 +46,27 @@
                         services.client.set('user', user);
                         console.log('Authenticated', user);
                         this.user = services.client.get('user');
+                        swal("Logged in!", "You were logged in successfully.", "success", {
+                            buttons: false,
+                            timer: 2000
+                        });
                         this.$router.push('/');
                     })
                     .catch(error => {
+                        swal("Uh oh!", "We couldn't log you in. Please try again.", "error", {
+                            buttons: false,
+                            timer: 2000
+                        });
                         console.error('Error authenticating!', error);
                     });
             },
             logout() {
                 this.user = null,
                 services.client.logout()
+                swal("Logged out!", "You were logged out successfully.", "success", {
+                    buttons: false,
+                    timer: 2000
+                });
                 this.$router.push('/login');
             }
         }

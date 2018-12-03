@@ -40,7 +40,7 @@ export default {
 
 <template>
   <div class="body-signup" id="authenticate">
-    <form style="border:1px solid #ccc">
+    <form style="border:1px solid #ccc" v-on:submit.prevent>
 
     <div class="container">
       <center>
@@ -56,7 +56,7 @@ export default {
 
       <div class="clearfix">
         <button type="button" class="cancel-button"><b>CANCEL</b></button>
-        <button v-on:click="$emit('login', {email, password})" class="signup-button"><b>LOGIN</b></button>
+        <button id="submit" v-on:click="$emit('login', {email, password})" class="signup-button"><b>LOGIN</b></button>
       </div>
 
     </div>
