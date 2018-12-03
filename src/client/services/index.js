@@ -5,7 +5,7 @@ import superagent from 'superagent';
 import localStorage from 'localstorage-memory';
 
 export const client = feathers()
-    .configure(rest(window.location.href).superagent(superagent))
+    .configure(rest("https://uf-std.herokuapp.com").superagent(superagent))
     .configure(auth({ storage: window.localStorage }));
 
 export const postService = client.service('posts');
