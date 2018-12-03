@@ -4,16 +4,19 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import * as services from '../services'
-import Foo from '../components/Foo.vue'
+
 import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
+
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-import Sidebar from '../components/Sidebar.vue'
+import Feed from '../components/Feed.vue'
 
 Vue.component('Navbar', Navbar);
 Vue.component('Login', Login);
 Vue.component('Register', Register);
 Vue.component('Sidebar', Sidebar);
+Vue.component('Feed', Feed);
 
 // VUE ROUTING
 
@@ -24,7 +27,6 @@ Vue.component('Sidebar', Sidebar);
 // These can be imported from other files
 const About = { template: '<h1>About UF-STD</h1>'}
 const Explore = { template: '<h1>Explore</h1>' }
-const Feed = { template: '<h1>Feed</h1>' }
 const Profile = { template: '<h1>Profile</h1>' }
 
 // 3. Create the router instance and pass the `routes` option
