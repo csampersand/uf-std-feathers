@@ -1,4 +1,4 @@
 {
-  "host": "uf-std-app.feathersjs.com",
+  "host": "uf-std.herokuapp.com",
   "port": "PORT"
 }
