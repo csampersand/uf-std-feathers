@@ -2,6 +2,7 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const populateMajors = require('../../hooks/populate-majors');
 
 const processUser = require('../../hooks/process-user');
+const processFollowing = require('../../hooks/process-following');
 
 const {
   hashPassword, protect
@@ -14,7 +15,7 @@ module.exports = {
     get: [ authenticate('jwt') ],
     create: [ hashPassword(), processUser()],
     update: [ hashPassword(),  authenticate('jwt'),processUser() ],
-    patch: [ hashPassword(),  authenticate('jwt'),processUser() ],
+    patch: [  authenticate('jwt'), processFollowing() ],
     remove: [ authenticate('jwt') ]
   },
 
