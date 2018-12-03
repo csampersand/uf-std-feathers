@@ -30,7 +30,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         // The post body
         const body = context.data.body;
 
-        const flag = context.data.flag;
+        var flag = context.data.flag;
 
         var _id;
         var comments = [];
@@ -49,14 +49,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             _id = user._id;
         }
 
-<<<<<<< HEAD
-        var comments = [];
-
-=======
->>>>>>> c3b22935a0ab1cc14ea37e8b9069cc9e36e8fcd5
         if (method === 'update') {
-            const post = await app.service('posts').get(id);
-
             comments = post.comments;
         }
         else if (method === 'create' && context.params.provider != undefined){
