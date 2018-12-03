@@ -56,3 +56,8 @@ app.use(express.errorHandler({ logger }));
 app.hooks(appHooks);
 
 module.exports = app;
+
+
+console.log(app.get('host'));
+console.log(app.get('port'));
+console.log(app.get('mongodb'));
