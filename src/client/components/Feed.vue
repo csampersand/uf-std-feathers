@@ -14,7 +14,11 @@ export default {
     },
     methods: {
         getPosts() {
-            services.postService.find({ $sort: { updatedAt: 1 } }).then(posts => this.posts = posts.data);
+            services.postService.find({
+                query: {
+                    $sort: { updatedAt: -1 }
+                }
+            }).then(posts => this.posts = posts.data);
         }
     }
 }
@@ -61,29 +65,6 @@ function swapText() {
             </div>
           </div>
 
-          <div id="my-reply" class="collapse">
-            <div class="jumbotron" style="width:90%;margin: auto;position: relative;float: inherit;padding-top:10px; padding-bottom:10px;">
-              <h6 class="blog-text"><i>comment posted by </i><b>Username</b></h6>
-              <div class="form-group">
-                <textarea class="form-control" rows="3" maxlength="250" placeholder="say something, I'm giving up on you..."required></textarea>
-                  <div style="padding:5px;"></div>
-                  <button type="submit" class="btn btn-primary">POST</button>
-              </div>
-            </div>
-            <div style="padding:17px;"></div>
-          </div>
-
-          <div id="comment-section" class="collapse">
-            <div class="jumbotron" style="width:90%;margin: auto;position: relative;float: inherit;padding-top:10px; padding-bottom:10px;">
-              <h6 class="blog-text"><i>comment posted by </i><b>Username</b></h6>
-              <p class="blog-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <button type="submit" class="btn btn-danger">DELETE</button>
-            </div>
-          </div>
         </div>
     </div>
 </template>
