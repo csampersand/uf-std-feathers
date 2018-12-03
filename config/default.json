@@ -3,8 +3,8 @@
   "port": 3030,
   "public": "../public/",
   "paginate": {
-    "default": 10,
-    "max": 50
+    "default": 9999,
+    "max": 9999
   },
   "mongodb": "mongodb://uf-std:secret1@ds044587.mlab.com:44587/uf-std-db",
   "authentication": {

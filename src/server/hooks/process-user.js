@@ -3,7 +3,7 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     return async context => {
-        const { data } = context;
+        const { data, method } = context;
 
         // The authenticated user
         const user = data;
@@ -24,7 +24,15 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const bio = user.bio;
         const password = user.password;
         const major = user.major;
+        var following = [];
 
+        if (method === 'update') {
+            following = user.following;
+        }
+        else if (method === 'create'){
+            following = []
+        }
+        
         // Override the user data (so that people can't become admin)
         context.data = {
             email,
@@ -35,7 +43,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             public: publicAttr,
             isAdmin: adminBool,
             password,
-            major
+            major,
+            following
             };
 
         // Best practice: hooks should always return the context

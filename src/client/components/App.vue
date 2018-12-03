@@ -27,7 +27,6 @@
                     })
                     .catch(error => {
                         console.error('Error authenticating!', error);
-                        this.$router.push('/login');
                     });
             },
             login(credentials) {
@@ -89,10 +88,11 @@
             v-on:logout="logout"></navbar>
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
-        <div id="wrapper" class="toggled">
-            <sidebar v-if="user"></sidebar>
-            <router-view id="page-content-wrapper" class="container" tag="div"
-                v-on:login="login"></router-view>
+        <div id="wrapper" v-bind:class="{ toggled: user }">
+            <sidebar></sidebar>
+            <router-view id="page-content-wrapper"
+                v-on:login="login"
+                v-bind:user="user"></router-view>
         </div>
     </div>
 </template>

@@ -164,7 +164,7 @@ async function seed(name, data) {
             var post = await seed('posts',
             {
                 title: capitalize(faker.lorem.words(random(3, 7))),
-                body: capitalize(faker.lorem.words(random(3, 7))),
+                body: capitalize(faker.lorem.words(random(50, 200))),
                 author: shuffle(createdUsers)[0]._id,
                 comments:Array.from(Array(random(5)), () => ({
                     text: capitalize(faker.lorem.words(random(3, 7))),
