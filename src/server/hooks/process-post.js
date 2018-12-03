@@ -29,38 +29,24 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const title = context.data.title;
         // The post body
         const body = context.data.body;
-
-        const flag = context.data.flag;
-
         var _id;
-        var comments = [];
-
-        if(flag == undefined){
-            flag = false;
-        }
 
         // When generating dummy data through script give allow the script to give the user id
         if(context.params.provider == undefined){
             _id = context.data.author;
-            comments = data.comments;
         }
         // In all other cases the user id will be the one in the browser session
         else{
             _id = user._id;
         }
 
-<<<<<<< HEAD
         var comments = [];
 
-=======
->>>>>>> c3b22935a0ab1cc14ea37e8b9069cc9e36e8fcd5
         if (method === 'update') {
-            const post = await app.service('posts').get(id);
-
             comments = post.comments;
         }
-        else if (method === 'create' && context.params.provider != undefined){
-            comments = []
+        else if (method === 'create'){
+            comments = [];
         }
 
         // Override the original data (so that people can't submit additional stuff)
@@ -69,8 +55,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             body,
             // Set the user id
             author: _id,
-            comments,
-            flag
+            comments: comments
         };
 
         // Best practice: hooks should always return the context
