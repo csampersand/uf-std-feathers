@@ -11,7 +11,9 @@
             }
         },
         created() {
-            services.majorService.find().then(majors => this.majors = majors.data);
+            services.majorService.find().then(majors => this.majors = majors.data).catch(function(error){
+                console.log(error);
+            });
         },
         methods: {
             register() {
