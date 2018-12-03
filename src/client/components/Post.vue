@@ -14,8 +14,6 @@
       {{ post.body }}
     </p>
     <div class="clearfix">
-      <button type="button" onclick="replyComment()"  id="myReply" class="btn btn-success btn-lg" data-toggle="collapse" data-target="#my-reply">COMMENT</button>
-      <button type="button" onclick="swapText()"  id="myComments" class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#comment-section">COMMENT SECTION</button>
       <div style="float:right;">
         <button v-if="user._id == post.author._id || user.isAdmin" type="button" class="btn btn-info btn-lg">Edit</button>
         <button v-if="user._id == post.author._id || user.isAdmin" type="button" class="btn btn-danger btn-lg">Delete</button>
