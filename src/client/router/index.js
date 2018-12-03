@@ -5,17 +5,13 @@ Vue.use(Router)
 
 import * as services from '../services'
 
-import Navbar from '../components/Navbar.vue'
-import Sidebar from '../components/Sidebar.vue'
 
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Feed from '../components/Feed.vue'
 
-Vue.component('Navbar', Navbar);
 Vue.component('Login', Login);
 Vue.component('Register', Register);
-Vue.component('Sidebar', Sidebar);
 Vue.component('Feed', Feed);
 
 // VUE ROUTING

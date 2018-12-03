@@ -2,6 +2,9 @@
     import * as services from '../services/'
     import swal from 'sweetalert';
 
+    import Navbar from '../components/Navbar.vue'
+    import Sidebar from '../components/Sidebar.vue'
+
     export default {
         data() {
             return {
@@ -77,12 +80,16 @@
                 });
                 this.$router.push('/login');
             }
+        },
+        components: {
+            Navbar,
+            Sidebar,
         }
     }
 </script>
 
 <template>
-    <div id="app" class="toggled">
+    <div id="app">
         <navbar
             v-bind:user="user"
             v-on:logout="logout"></navbar>
