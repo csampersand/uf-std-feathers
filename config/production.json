@@ -1,6 +1,6 @@
 {
   "host": "uf-std.herokuapp.com",
-  "port": 58854,
+  "port": "PORT",
   "public": "../public/",
   "paginate": {
     "default": 10,

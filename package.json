@@ -68,11 +68,6 @@
     "vue": "^2.5.17",
     "vue-feathers": "^0.1.0",
     "vue-router": "^3.0.2",
-    "vue-loader": "^15.4.2",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2",
     "winston": "^3.1.0"
   },
   "devDependencies": {
@@ -85,6 +80,11 @@
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^5.9.0",
     "mocha": "^5.2.0",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
     "nodemon": "^1.18.6"
   }
 }
