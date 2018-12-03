@@ -1,4 +1,6 @@
 {
   "host": "uf-std.herokuapp.com",
-  "port": "PORT"
+  "public": "../public/",
+  "port": 58854,
+  "mongodb": "mongodb://uf-std:secret1@ds044587.mlab.com:44587/uf-std-db",
 }
