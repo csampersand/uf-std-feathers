@@ -158,7 +158,7 @@ async function seed(name, data) {
         console.log("\n Users: ", createdUsers);
 
         // Making 20 posts and assigning them random users as creators
-        for(var i = 0; i < 20;i++){
+        for(var i = 0; i < 50;i++){
             // Create a random amount of comments for each post
 
             var post = await seed('posts',
