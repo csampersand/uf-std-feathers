@@ -3,12 +3,13 @@
 import * as services from '../services'
 
 import Post from './Post.vue'
+import Sidebar from './Sidebar.vue'
 
 export default {
-    props: ['user'],
+    props: ['user','major'],
     data() {
         return {
-            posts: null
+            posts: null,
         }
     },
     created() {
@@ -20,9 +21,10 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts => this.posts = posts.data);
+            }).then(posts =>
+            this.posts = posts.data);
         }
-    },
+     },
     components: {
         Post
     }
@@ -31,12 +33,16 @@ export default {
 <template>
     <div>
         <div class="box-frame">
-          <h1 class="display-3" style="padding-bottom:20px;"><b>Major</b></h1>
+          <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
+              <b>{{major.majorName}}</b>
+              </h1>
+            <h1 v-else>Majors</h1>
 
             <post
                 v-if="posts && user"
                 v-for="post in posts"
                 :key="post._id"
+                v-bind:major="major"
                 v-bind:post="post"
                 v-bind:user="user">
             </post>

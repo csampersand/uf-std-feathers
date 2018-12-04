@@ -18,7 +18,7 @@ export default {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <router-link v-if="user" class="nav-link" to="/feed">Your Feed</router-link>
+                    <router-link v-if="user" class="nav-link" to="/feed" v-on:click="$emit('setUpFilter', '')">Your Feed</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link class="nav-link" to="/explore">Explore</router-link>

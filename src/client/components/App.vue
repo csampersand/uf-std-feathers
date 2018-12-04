@@ -8,7 +8,8 @@
     export default {
         data() {
             return {
-                user: null
+                user: null,
+                major:null
             }
         },
         created() {
@@ -79,6 +80,9 @@
                     timer: 2000
                 });
                 this.$router.push('/login');
+            },
+            setUpFilter(major){
+                this.major = major;
             }
         },
         components: {
@@ -92,14 +96,18 @@
     <div id="app">
         <navbar
             v-bind:user="user"
-            v-on:logout="logout"></navbar>
+            v-on:logout="logout"
+            v-on:setUpFilter="setUpFilter"></navbar>
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
         <div id="wrapper" v-bind:class="{ toggled: user }">
-            <sidebar></sidebar>
+            <sidebar v-on:setUpFilter="setUpFilter">
+
+            </sidebar>
             <router-view id="page-content-wrapper"
                 v-on:login="login"
-                v-bind:user="user"></router-view>
+                v-bind:user="user"
+                v-bind:major="major"></router-view>
         </div>
     </div>
 </template>
