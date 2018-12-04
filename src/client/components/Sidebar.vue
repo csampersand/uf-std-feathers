@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li v-for="major in majors">
-                <a href="#" v-on:click="$emit('setUpFilter', major)">{{ major.majorName }}</a>
+                <router-link :to="{ name:'explore', params: { majorId: major._id} }">{{ major.majorName }}</router-link>
             </li>
         </ul>
     </div>
