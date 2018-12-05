@@ -98,7 +98,7 @@
             v-on:logout="logout"></navbar>
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
-        <div id="wrapper" v-bind:class="{ toggled: user }">
+        <div id="wrapper" v-bind:class="{ toggled: user && this.$route.path.includes('/explore') }">
             <sidebar>
 
             </sidebar>
