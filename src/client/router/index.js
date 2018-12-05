@@ -33,7 +33,8 @@ const About = { template: '<h1>About UF-STD</h1>'}
 export default new Router({
     routes: [
         { path: '/', component: About},
-        { path: '/explore/:majorId?',name:"explore" ,  component: Explore, props: true },
+        { path: '/explore', component: Explore },
+        { path: '/explore/:majorId', component: Explore, props: true },
         { path: '/feed',name:"feed", component: Feed , props: true},
         { path: '/profile', component: Profile },
 

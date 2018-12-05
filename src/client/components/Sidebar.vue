@@ -26,7 +26,8 @@
                 </a>
             </li>
             <li v-for="major in majors">
-                <router-link class="side-item" :to="{ name:'explore', params: { majorId: major._id} }">{{ major.majorName }}</router-link>
+                <!-- <router-link class="side-item" :to="{ name:'explore', params: { majorId: major._id} }">{{ major.majorName }}</router-link> -->
+                <router-link class="side-item" :to="{ path: '/explore/' + major._id }">{{ major.majorName }}</router-link>
             </li>
         </ul>
     </div>

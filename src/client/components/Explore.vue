@@ -6,20 +6,19 @@ import Post from './Post.vue'
 import Sidebar from './Sidebar.vue'
 
 export default {
-    props: ['user'],
+    props: ['user', 'majorId'],
     data() {
         return {
             posts: null,
             major: null
         }
     },
-    watch: {
-    '$route.params.majorId': function () {
-      this.getMajors()
-    }
-  },
     created() {
         this.getPosts();
+        this.getMajor();
+    },
+    updated() {
+        this.getMajor();
     },
     methods: {
         getPosts() {
@@ -27,24 +26,14 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts =>
-            this.posts = posts.data);
+            }).then(posts => this.posts = posts.data);
         },
-        getMajors(){
-            if(this.$route.params.majorId){
-                services.majorService.find({
-                query:{
-                    _id: this.$route.params.majorId
-                }
-            }).then(major =>
-                this.major = major.data[0]);
+        getMajor() {
+            if (this.majorId) {
+                services.majorService.get(this.majorId).then(major => this.major = major);
             }
-            else{
-                this.major = null;
-            }
-
         }
-     },
+    },
     components: {
         Post
     }
