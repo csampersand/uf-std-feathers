@@ -71,7 +71,7 @@
     <!-- <input class="input-signup" type="text" placeholder="Enter Your Major of Study" name="major" required> -->
 
     <label v-bind:class="{ error: Object.keys(errors).includes('email') }" for="email"><b>UFL EMAIL</b></label>
-    <input v-model="user.email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+    <input v-model="user.email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email"  pattern="[a-z0-9._%+-]+@ufl.edu$" title="Please provide a valid ufl email" required>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('password') }" for="password"><b>PASSWORD</b></label>
     <input v-model="user.password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
