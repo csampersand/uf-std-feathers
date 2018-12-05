@@ -42,6 +42,10 @@ export default {
               </h1>
             <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Your Feed</b></h1>
 
+            <div v-if="user.following.length == 0" style="font-size: 24px">
+                You're not following anyone right now! Go to the <b>Explore</b> tab and follow some blogs to see content here! 😉
+            </div>
+
     <div v-if="posts && user">
         <post
             v-for="post in posts"

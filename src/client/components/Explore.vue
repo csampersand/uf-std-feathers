@@ -59,6 +59,10 @@ export default {
               <b>{{major.majorName}}</b>
               </h1>
             <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Explore</b></h1>
+
+            <div v-if="posts.length == 0" style="font-size: 24px">
+                There aren't any posts here right now. How about you make one!
+            </div>
             <div v-if="posts && user">
                 <post
                     v-if="major == null || post.author.major._id == major._id"
