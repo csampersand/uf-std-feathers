@@ -6,18 +6,13 @@ import Post from './Post.vue'
 import Sidebar from './Sidebar.vue'
 
 export default {
-    props: ['user'],
+    props: ['user', 'majorId'],
     data() {
         return {
             posts: null,
             major: null
         }
     },
-    watch: {
-    '$route.params.majorId': function () {
-      this.getMajors()
-    }
-  },
     created() {
         this.getPosts();
     },
@@ -27,24 +22,9 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts =>
-            this.posts = posts.data);
-        },
-        getMajors(){
-            if(this.$route.params.majorId){
-                services.majorService.find({
-                query:{
-                    _id: this.$route.params.majorId
-                }
-            }).then(major =>
-                this.major = major.data[0]);
-            }
-            else{
-                this.major = null;
-            }
-
+            }).then(posts => this.posts = posts.data);
         }
-     },
+    },
     components: {
         Post
     }
@@ -56,7 +36,7 @@ export default {
           <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
               <b>{{major.majorName}}</b>
               </h1>
-            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>All Posts</b></h1>
+            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Explore</b></h1>
             <div v-if="posts && user">
                 <post
                     v-if="major == null || post.author.major._id == major._id"

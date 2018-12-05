@@ -6,7 +6,7 @@ import Post from './Post.vue'
 import Sidebar from './Sidebar.vue'
 
 export default {
-    props: ['user'],
+    props: ['user', 'majorId'],
     data() {
         return {
             posts: null,
@@ -15,6 +15,10 @@ export default {
     },
     created() {
         this.getPosts();
+        this.getMajor();
+    },
+    updated() {
+        this.getMajor();
     },
     methods: {
         getPosts() {
@@ -22,10 +26,14 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts =>
-            this.posts = posts.data);
+            }).then(posts => this.posts = posts.data);
+        },
+        getMajor() {
+            if (this.majorId) {
+                services.majorService.get(this.majorId).then(major => this.major = major);
+            }
         }
-     },
+    },
     components: {
         Post
     }
@@ -37,20 +45,16 @@ export default {
           <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
               <b>{{major.majorName}}</b>
               </h1>
-            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Your Feed</b></h1>
-
-    <div v-if="posts && user">
-        <post
-            v-for="post in posts"
-            :key="post._id"
-            v-if="user.following.includes(post.author._id)"
-            v-bind:major="major"
-            v-bind:post="post"
-            v-bind:user="user">
-        </post>
-
-    </div>
-
+            <div v-if="posts && user">
+                <post
+                    v-if="major == null || post.author.major._id == major._id"
+                    v-for="post in posts"
+                    :key="post._id"
+                    v-bind:major="major"
+                    v-bind:post="post"
+                    v-bind:user="user">
+                </post>
+            </div>
         </div>
     </div>
 </template>

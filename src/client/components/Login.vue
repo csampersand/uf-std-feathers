@@ -16,23 +16,27 @@ export default {
 
 <template>
   <div class="body-signup" id="authenticate">
-    <form style="border:1px solid #ccc" v-on:submit.prevent>
+    <form v-on:submit.prevent>
 
-    <div class="container">
+    <div class="jumbotron" style="border:3px solid #ccc;" >
       <center>
         <h1><b>LOGIN</b></h1>
       </center>
-      <hr class="hr-signup">
+      <hr style="border:2px solid #ccc; color: #ccc; margin-bottom: 10px">
 
       <label for="email"><b>UFL EMAIL</b></label>
-      <input v-model="email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+      <input v-model="email" class="form-control" type="text" placeholder="your_ufl@ufl.edu" name="email" required>
+
+      <div style="padding-bottom: 20px;"></div>
 
       <label for="psw"><b>PASSWORD</b></label>
-      <input v-model="password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
+      <input v-model="password" class="form-control" type="password" placeholder="Enter Password" name="psw" required>
+
+      <div style="padding-bottom: 40px;"></div>
 
       <div class="clearfix">
-        <button type="button" class="cancel-button"><b>CANCEL</b></button>
-        <button id="submit" v-on:click="$emit('login', {email, password})" class="signup-button"><b>LOGIN</b></button>
+        <button type="button" class="btn btn-danger" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
+        <button id="submit" v-on:click="$emit('login', {email, password})" type="button" class="btn btn-success" style="font-size : 17px;float: right; width: 48%; padding: 14px 20px;"><b>LOGIN</b></button>
       </div>
 
     </div>
@@ -43,8 +47,7 @@ export default {
 <style>
 .body-signup {font-family: Arial, Helvetica, sans-serif;
   padding-top: 10px;
-  padding-left: 25%;
-  padding-right: 25%;
+
 }
 
 .header-signup {
@@ -72,7 +75,7 @@ export default {
 }
 
 .hr-signup {
-  border: 1px solid #f1f1f1;
+  border: 1px solid black;
   margin-bottom: 22px;
 }
 

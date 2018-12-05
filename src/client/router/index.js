@@ -9,6 +9,7 @@ import * as services from '../services'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Explore from '../components/Explore.vue'
+import Major from '../components/Major.vue'
 import Feed from '../components/Feed.vue'
 import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
@@ -25,6 +26,7 @@ Vue.component('About', About);
 Vue.component('Profile', Profile);
 Vue.component('Admin', Admin);
 
+Vue.component('Major', Major);
 
 // VUE ROUTING
 
@@ -40,8 +42,9 @@ Vue.component('Admin', Admin);
 export default new Router({
     routes: [
         { path: '/', component: About},
-        { path: '/explore/:majorId?',name:"explore" ,  component: Explore, props: true },
-        { path: '/feed',name:"feed", component: Feed , props: true},
+        { path: '/feed', component: Feed },
+        { path: '/explore', component: Explore },
+        { path: '/explore/:majorId?', component: Major, props: true },
         { path: '/profile', component: Profile },
         { path: '/blog/:userId',name:"blog" ,  component: Blog, props: true },
         { path: '/admin', component: Admin},
