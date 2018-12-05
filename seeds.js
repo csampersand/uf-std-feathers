@@ -159,6 +159,7 @@ async function seed(name, data) {
         var updatedUsers = [];
         for(var i = 0;i < users.length;i++){
             users[i].following.push(shuffle(users)[0]._id);
+            users[i].following.push(shuffle(users)[0]._id);
             updatedUsers.push(await userService.patch(users[i]._id,users[i]));
         }
         console.log("\n Updated Users: ", updatedUsers);
