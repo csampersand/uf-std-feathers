@@ -15,7 +15,7 @@ module.exports = {
     get: [ authenticate('jwt') ],
     create: [ hashPassword(), processUser()],
     update: [ hashPassword(),  authenticate('jwt'),processUser() ],
-    patch: [  authenticate('jwt'), processFollowing() ],
+    patch: [  authenticate('jwt') ],
     remove: [ authenticate('jwt') ]
   },
 

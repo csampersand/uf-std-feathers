@@ -24,6 +24,9 @@ export default {
                 }
             }).then(posts =>
             this.posts = posts.data);
+        },
+        unfollow(userId){
+            this.$emit('unfollow',userId);
         }
      },
     components: {
@@ -43,10 +46,11 @@ export default {
         <post
             v-for="post in posts"
             :key="post._id"
-            v-if="user.following.includes(post.author._id)"
+            v-if="user.following.includes(post.author._id) && post.author._id != user._id"
             v-bind:major="major"
             v-bind:post="post"
-            v-bind:user="user">
+            v-bind:user="user"
+            v-on:unfollow="unfollow">
         </post>
 
     </div>

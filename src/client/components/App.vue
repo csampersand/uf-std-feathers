@@ -11,7 +11,7 @@
     export default {
         data() {
             return {
-                user: null,
+                user: null
             }
         },
         created() {
@@ -82,6 +82,28 @@
                     timer: 2000
                 });
                 this.$router.push('/login');
+            },
+            follow(userId){
+                if(userId){
+                    this.user.following.push(userId);
+                    services.userService.patch(this.user._id,this.user).then(()=>{
+                        swal("Followed", "Succesfully followed.", "success", {
+                            buttons: false,
+                            timer: 2000
+                        });
+                    });
+                }
+            },
+            unfollow(userId){
+                if(userId){
+                    this.user.following.splice(this.user.following.indexOf(),1);
+                    services.userService.patch(this.user._id,this.user).then(()=>{
+                        swal("Unfollowed", "Succesfully Unfollowed.", "success", {
+                            buttons: false,
+                            timer: 2000
+                        });
+                    });
+                }
             }
         },
         components: {
@@ -104,6 +126,8 @@
             </sidebar>
             <router-view id="page-content-wrapper"
                 v-on:login="login"
+                v-on:follow="follow"
+                v-on:unfollow="unfollow"
                 v-bind:user="user"></router-view>
         </div>
     </div>

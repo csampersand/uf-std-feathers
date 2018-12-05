@@ -43,8 +43,15 @@ export default {
                 this.major = null;
             }
 
+        },
+        follow(userId){
+            this.$emit('follow',userId);
+     },
+        unfollow(userId){
+            this.$emit('unfollow',userId);
         }
      },
+
     components: {
         Post
     }
@@ -64,7 +71,9 @@ export default {
                     :key="post._id"
                     v-bind:major="major"
                     v-bind:post="post"
-                    v-bind:user="user">
+                    v-bind:user="user"
+                    v-on:follow="follow"
+                    v-on:unfollow="unfollow">
                 </post>
             </div>
         </div>
