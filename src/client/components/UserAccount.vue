@@ -1,7 +1,26 @@
+
 <script>
+import * as services from '../services'
+
     export default {
         props: ['user'],
+        data() {
+        return {
+            posts: null
+        }
+    },
+    created() {
+        this.getPosts();
+    },
         methods:{
+        getPosts() {
+            services.postService.find({
+                query: {
+                    $sort: { updatedAt: -1 }
+                }
+            }).then(posts =>
+            this.posts = posts.data);
+        },
         swapText() {
         var x = document.getElementById("myComments");
         if (x.innerHTML === "COMMENT SECTION") {
@@ -32,7 +51,7 @@
       <div class="user-account-card" >
 
         <h1>{{user.fname}}</h1>
-        <p class="user-account-title">Major, Year</p>
+        <p class="user-account-title">{{user.major.majorName}}, {{user.gradYear}}</p>
         <p style="text-align:left; padding-left:10px; padding-right:10px;">
           <b>Bio: </b>
             {{user.bio}}
@@ -47,20 +66,23 @@
     </div>
 
     <!-- BLOG POST -->
-    <div class="box-frame" style="position: absolute;right:0;top:0">
-      <h1 class="display-3" style="padding-bottom:20px;"><b>{{user.fname}}'s Blog</b></h1>
+    <dir v-if="posts">
+        <div style="float: right; width: 65%;">
+            <h1 class="display-3" style="padding-bottom:20px;"><b>{{user.fname}}'s Blog</b></h1>
+        </div>
+
+  <div style="float: right; width: 65%;"  v-for="post in posts" :key="post._id" v-if="post.author._id == user._id">
 
       <div class="jumbotron" style="padding-top:10px; padding-bottom:10px;">
-        <h2 class="display-4">Toppic Of Discussion</h2>
-        <h6 class="blog-text"><i>posted by </i><b>Username</b></h6>
+        <h2 class="display-4">{{post.title}}</h2>
+        <h6><i>posted by </i><b>{{user.fname}}</b></h6>
         <hr style="width: 90%;">
 
         <p class="blog-text">
-          THIS IS WHERE THE POST FROM THE STUDENTS ARE GONNA BE ISH.
+          {{post.body}}
         </p>
         <div class="clearfix">
-          <button type="button" onclick="replyComment()"  id="myReply" class="btn btn-success btn-lg" data-toggle="collapse" data-target="#my-reply">COMMENT</button>
-          <button type="button" onclick="swapText()"  id="myComments" class="btn btn-primary btn-lg" data-toggle="collapse" data-target="#comment-section">COMMENT SECTION</button>
+          <button type="button" class="btn btn-primary btn-lg" >COMMENT SECTION</button>
           <div style="float:right;">
             <button type="button" class="btn btn-info btn-lg">EDIT</button>
             <button type="button" class="btn btn-danger btn-lg">DELETE</button>
@@ -73,7 +95,7 @@
         <div class="jumbotron" style="width:90%;margin: auto;position: relative;float: inherit;padding-top:10px; padding-bottom:10px;">
           <h6 class="blog-text"><i>comment posted by </i><b>Username</b></h6>
           <div class="form-group">
-            <textarea class="form-control" rows="3" maxlength="250" placeholder="say something, I'm giving up on you..."required></textarea>
+            <textarea class="form-control" rows="3" maxlength="1000" placeholder="say something, I'm giving up on you..." required></textarea>
               <div style="padding:5px;"></div>
               <button type="submit" class="btn btn-primary">POST</button>
           </div>
@@ -93,6 +115,8 @@
         </div>
       </div>
     </div>
+    </dir>
+
 
 </div>
 
@@ -106,20 +130,9 @@
   position: fixed;
 }
 
-.user-account-img {
-  float: center;
-  max-width: 300px;
-  border-radius: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  padding-bottom: 10px;
-}
-
 .user-account-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 350px;
+    max-width: 300px;
     margin: auto;
     text-align: center;
 }
