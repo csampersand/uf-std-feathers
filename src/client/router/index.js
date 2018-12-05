@@ -15,6 +15,7 @@ import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
 import Profile from '../components/Profile.vue'
 import Admin from '../components/Admin.vue'
+import NewPost from '../components/NewPost.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
@@ -24,6 +25,7 @@ Vue.component('Blog', Blog);
 Vue.component('About', About);
 Vue.component('Profile', Profile);
 Vue.component('Admin', Admin);
+Vue.component('NewPost', NewPost);
 
 Vue.component('Major', Major);
 
@@ -46,6 +48,7 @@ export default new Router({
         { path: '/explore/:majorId?', component: Major, props: true },
         { path: '/profile', component: Profile },
         { path: '/blog/:userId',name:"blog" ,  component: Blog, props: true },
+        { path: '/post', component: NewPost },
         { path: '/admin', component: Admin},
 
         // Auth pages

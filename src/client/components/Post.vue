@@ -55,7 +55,7 @@
 </script>
 
 <template>
-<div>
+<div v-if="!post.author.isBanned">
   <div v-if="!deleted" class="jumbotron" style="padding-top:10px; padding-bottom:10px;">
     <h4 v-if="!editing" class="h2">{{ post.title }}</h4>
     <input v-else class="form-control" v-model="post.title"></input>

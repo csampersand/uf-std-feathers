@@ -17,6 +17,9 @@
         created() {
             this.auth();
         },
+        updated() {
+            this.banCheck();
+        },
         methods: {
             auth() {
                 services.client.authenticate()
@@ -74,7 +77,7 @@
                         console.error('Error authenticating!', error);
                     });
             },
-            logout() {
+            logout(banned) {
                 this.user = null,
                 services.client.logout()
                 swal("Logged out!", "You were logged out successfully.", "success", {
@@ -82,6 +85,17 @@
                     timer: 2000
                 });
                 this.$router.push('/login');
+            },
+            banCheck() {
+                if (this.user != null && this.user.isBanned) {
+                    this.user = null,
+                    services.client.logout()
+                    swal("Uh oh!", "Looks like you have been banned. You are now logged out.", "error", {
+                        buttons: false,
+                        timer: 2000
+                    });
+                    this.$router.push('/login');
+                }
             },
             follow(userId){
                 if(userId){
