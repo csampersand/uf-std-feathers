@@ -100,10 +100,14 @@ body {
   line-height: 40px;
 }
 
+.router-link-active {
+    color: #fff !important;
+}
+
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #77AEFF;
 }
 
 .sidebar-nav li a:hover {
