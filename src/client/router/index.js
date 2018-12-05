@@ -14,6 +14,7 @@ import Feed from '../components/Feed.vue'
 import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
 import Profile from '../components/EditUser.vue'
+import Admin from '../components/Admin.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
@@ -23,6 +24,8 @@ Vue.component('Feed', Feed);
 Vue.component('Blog', Blog);
 Vue.component('About', About);
 Vue.component('Profile', Profile);
+Vue.component('Admin', Admin);
+
 Vue.component('Major', Major);
 
 // VUE ROUTING
@@ -44,6 +47,7 @@ export default new Router({
         { path: '/explore/:majorId?', component: Major, props: true },
         { path: '/profile', component: Profile },
         { path: '/blog/:userId',name:"blog" ,  component: Blog, props: true },
+        { path: '/admin', component: Admin},
 
         // Auth pages
         { path: '/login', component: Login },
