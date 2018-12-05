@@ -20,8 +20,10 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts =>
-            this.posts = posts.data);
+            }).then(posts =>{
+            this.posts = posts.data.filter(f =>
+                this.user.following.includes(f.author._id));
+            });
         }
      },
     components: {

@@ -9,10 +9,12 @@ import * as services from '../services'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Explore from '../components/Explore.vue'
+import Feed from '../components/Feed.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
 Vue.component('Explore', Explore);
+Vue.component('Feed', Feed);
 
 // VUE ROUTING
 
@@ -22,7 +24,6 @@ Vue.component('Explore', Explore);
 // 1. Define route components.
 // These can be imported from other files
 const About = { template: '<h1>About UF-STD</h1>'}
-const Feed = { template: '<h1>Feed</h1>' }
 const Profile = { template: '<h1>Profile</h1>' }
 
 // 3. Create the router instance and pass the `routes` option
@@ -32,7 +33,7 @@ export default new Router({
     routes: [
         { path: '/', component: About},
         { path: '/explore/:majorId?',name:"explore" ,  component: Explore, props: true },
-        { path: '/feed', component: Feed },
+        { path: '/feed',name:"feed", component: Feed , props: true},
         { path: '/profile', component: Profile },
 
         // Auth pages
