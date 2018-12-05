@@ -58,7 +58,7 @@ export default {
 .pull-left {
     left:0;
 }
-.router-active {
+.nav-link .router-active {
     font-weight: bold;
     color: #FFFFFF;
 }

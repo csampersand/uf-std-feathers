@@ -1,6 +1,9 @@
 <script>
     import * as services from '../services/'
-    import swal from 'sweetalert';
+
+    // Style components
+    import swal from 'sweetalert'
+    import bootstrap from 'bootstrap'
 
     import Navbar from '../components/Navbar.vue'
     import Sidebar from '../components/Sidebar.vue'
@@ -105,3 +108,9 @@
         </div>
     </div>
 </template>
+
+<style lang="scss">
+@import "bootstrap/scss/bootstrap.scss";
+@import "../styles/_bootswatch.scss";
+@import "../styles/_variables.scss";
+</style>

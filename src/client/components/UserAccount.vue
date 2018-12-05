@@ -59,10 +59,9 @@ import * as services from '../services'
 
 <template>
 <div v-if="author">
-        <div v-if="author.major" class="user-account-body" >
-      <!-- <img class="user-account-img" src="./img/blank-profile-img.png"> -->
+    <div v-if="author.major" style="float:left; padding-top: 15px; padding-left: 15px;">
 
-      <div class="user-account-card" >
+      <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); max-width: 300px; margin: auto; text-align: center; float: left;" >
 
         <h1>{{author.fname}}</h1>
         <p class="user-account-title">{{author.major.majorName}}, {{author.gradYear}}</p>
@@ -74,7 +73,7 @@ import * as services from '../services'
         <a class="user-account-a" href="http://linkedin.com"><i class="fa fa-linkedin" style="font-size:40px"></i></a>
         <a class="user-account-a" href="http://facebook.com"><i class="fa fa-facebook" style="font-size:40px"></i></a>
 
-        <p><button class="user-account-button"><b>Report User</b></button></p>
+        <p><button type="button" class="btn btn-danger" style="width:80%;"><b>Report User</b></button></p>
 
       </div>
     </div>
@@ -137,7 +136,19 @@ import * as services from '../services'
 </template>
 
 <style>
-.user-account-body {font-family: Arial, Helvetica, sans-serif;
+
+.user-account-title {
+    color: grey;
+    font-size: 18px;
+}
+
+.user-account-a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+/* .user-account-body {font-family: Arial, Helvetica, sans-serif;
   padding-top: 5px;
   padding-left: 15px;
   float: left;
@@ -149,11 +160,7 @@ import * as services from '../services'
     max-width: 300px;
     margin: auto;
     text-align: center;
-}
-
-.user-account-title {
-    color: grey;
-    font-size: 18px;
+    float: left;
 }
 
 .user-account-button {
@@ -167,12 +174,6 @@ import * as services from '../services'
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-}
-
-.user-account-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
 }
 
 .user-account-button:hover, a:hover {
@@ -196,6 +197,6 @@ import * as services from '../services'
 .user-account-button-report:hover {
     opacity: 0.7;
     background-color: darkred;
-}
+} */
 
 </style>

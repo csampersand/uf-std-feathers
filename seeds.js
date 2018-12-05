@@ -76,7 +76,7 @@ async function seed(name, data) {
 
         users = [
             {
-              email:"carlos@gmail.com",
+              email:"carlos@ufl.edu",
               fname:"Carlos",
               lname: "Avogadro",
               gradYear:"2020",
@@ -87,7 +87,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"james@gmail.com",
+              email:"james@ufl.edu",
               fname:"James",
               lname: "Hollnad",
               gradYear:"2022",
@@ -98,7 +98,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"jake@gmail.com",
+              email:"jake@ufl.edu",
               fname:"Jake",
               lname: "StateFarm",
               gradYear:"2018",
@@ -109,7 +109,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"jane@gmail.com",
+              email:"jane@ufl.edu",
               fname:"Jane",
               lname: "Doe",
               gradYear:"2021",
@@ -120,7 +120,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"mike@gmail.com",
+              email:"mike@ufl.edu",
               fname:"Mike",
               lname: "Arboleda",
               gradYear:"2020",
@@ -131,7 +131,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"admin@gmail.com",
+              email:"admin@ufl.edu",
               fname:"Travis",
               lname: "Scott",
               gradYear:"2020",

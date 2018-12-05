@@ -57,16 +57,16 @@ export default {
               <b>{{major.majorName}}</b>
               </h1>
             <h1 class="display-3" style="padding-bottom:20px;" v-else><b>All Posts</b></h1>
-
-            <post
-                v-if="posts && user"
-                v-for="post in posts"
-                :key="post._id"
-                v-bind:major="major"
-                v-bind:post="post"
-                v-bind:user="user">
-            </post>
-
+            <div v-if="posts && user">
+                <post
+                    v-if="major == null || post.author.major._id == major._id"
+                    v-for="post in posts"
+                    :key="post._id"
+                    v-bind:major="major"
+                    v-bind:post="post"
+                    v-bind:user="user">
+                </post>
+            </div>
         </div>
     </div>
 </template>

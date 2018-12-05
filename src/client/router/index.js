@@ -12,6 +12,7 @@ import Explore from '../components/Explore.vue'
 import Feed from '../components/Feed.vue'
 import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
+import Profile from '../components/EditUser.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
@@ -20,6 +21,7 @@ Vue.component('Feed', Feed);
 // Vue.component('Profile', Profile);
 Vue.component('Blog', Blog);
 Vue.component('About', About);
+Vue.component('Profile', Profile);
 
 // VUE ROUTING
 
@@ -28,7 +30,6 @@ Vue.component('About', About);
 
 // 1. Define route components.
 // These can be imported from other files
-const Profile = { template: '<h1>Profile</h1>'}
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
