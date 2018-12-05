@@ -58,8 +58,6 @@ export default {
               </h1>
             <h1 class="display-3" style="padding-bottom:20px;" v-else><b>All Posts</b></h1>
 
-            <!-- <h1>{{this.$route.params.majorId}}</h1> -->
-
             <post
                 v-if="posts && user"
                 v-for="post in posts"

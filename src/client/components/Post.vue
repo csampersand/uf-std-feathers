@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="jumbotron" style="padding-top:10px; padding-bottom:10px;" v-if=" major == null|| post.author.major._id == major._id">
+  <div class="jumbotron" style="padding-top:10px; padding-bottom:10px;" v-if="major == null || post.author.major._id == major._id">
     <h4 class="h2">{{ post.title }}</h4>
     <h6 class="blog-text"><i>posted by </i><b>{{ post.author.fname }} {{ post.author.lname }}</b></h6>
     <hr style="width: 90%;">
