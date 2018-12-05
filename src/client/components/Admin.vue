@@ -30,8 +30,25 @@
               var major = this.majors.find(major => major._id === majorId);
               return major.majorName;
             },
-            deleteUser(userId) {
-                services.userService.remove(userId).then(() => {
+            banUser(user) {
+                user.isBanned = true;
+                services.userService.patch(user._id, user).then(() => {
+                  swal("User Deleted!", "success", {
+                      buttons: false,
+                      timer: 2000
+                  });
+                  services.userService.find().then(user => this.users = user.data);
+                }).catch(error => {
+                    this.errors = error.errors;
+                    swal("Uh oh!", "We couldn't delete the user. Please try again.", "error", {
+                        buttons: false,
+                        timer: 2000
+                    });
+                })
+            },
+            unBanUser(user) {
+                user.isBanned = false;
+                services.userService.patch(user_id, user).then(() => {
                   swal("User Deleted!", "success", {
                       buttons: false,
                       timer: 2000
@@ -57,15 +74,16 @@
       <div style="margin-bottom:15px;"></div>
       <div class="row">
         <div v-for="user in users" class="column">
-          <div class="card border-dark mb-3">
+          <div v-bind:class="{'card text-white bg-danger mb-3': user.isBanned, 'card border-dark mb-3': !user.isBanned}">
             <div class="card-header">{{ user.email }}</div>
             <div class="card-body">
               <h4 class="card-title">{{ user.fname }}, {{ user.lname }}</h4>
               <h5>{{ getMajor(user.major) }}, {{ user.gradYear }}</h5>
               <p class="card-text"><b>Bio: </b>{{ user.bio }}</p>
-              <button v-on:click="deleteUser(user._id)" type="button" class="btn btn-danger" style=""><i class="fa fa-bars"></i>Delete</button>
+              <button v-on:click="banUser(user)" type="button" class="btn btn-warning" style="float: right"><i class="fa fa-bars"></i>Ban</button>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
