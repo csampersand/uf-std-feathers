@@ -1,27 +1,72 @@
+<script>
+    import * as services from '../services'
+    import swal from 'sweetalert';
+
+    export default {
+        props: ['user'],
+        data() {
+            return {
+                majors: [],
+                errors: []
+            }
+        },
+        created() {
+            services.majorService.find().then(majors => this.majors = majors.data);
+        },
+        methods: {
+            register() {
+                services.userService.update(this.user._id, this.user).then(() => {
+                  swal("shit wored");
+                }).catch(error => {
+                    this.errors = error.errors;
+                    swal("Uh oh!", "We couldn't sign you up. Please try again.", "error", {
+                        buttons: false,
+                        timer: 2000
+                    });
+                })
+            }
+        }
+    }
+</script>
+
 <template>
 <div class="user-account-body">
 <div class="user-account-card">
 
-    <div style="text-align:left; padding-top:15px; padding-left:10px; padding-right:10px; width:100%;">
-      <input class="user-account-input" type="text" placeholder="First Name" name="first-name" required>
-      <input class="user-account-input" type="text" placeholder="Last Name" name="last-name" required>
-      <input class="user-account-input" type="text" placeholder="Email" name="email" required>
+  <form style="border:1px solid #ccc" v-on:submit.prevent="register">
 
-      <select class="selection" required>
-        <option value="default">Update Current Major</option>
-        <option value="CS">Computer Science</option>
-        <option value="CpE">Computer Engineering</option>
-        <option value="EE">Electrical Engineering</option>
-        <option value="Mech">Mechanical Engineering</option>
+    <div v-if="user" style="text-align:left; padding-top:15px; padding-left:10px; padding-right:10px; width:100%;">
+
+      <label v-bind:class="{ error: Object.keys(errors).includes('fname') }" for="fname"><b>FIRST NAME</b></label>
+      <input v-model="user.fname" class="user-account-input" type="text" placeholder="First Name" name="first-name" required>
+
+      <label v-bind:class="{ error: Object.keys(errors).includes('lname') }" for="lname"><b>LAST NAME</b></label>
+      <input v-model="user.lname" class="user-account-input" type="text" placeholder="Last Name" name="last-name" required>
+     
+      <label v-bind:class="{ error: Object.keys(errors).includes('email') }" for="email"><b>EMAIL</b></label>
+      <input v-model="user.email" class="user-account-input" type="text" placeholder="Email" name="email" required>
+
+      <label v-bind:class="{ error: Object.keys(errors).includes('major') }" for="major"><b>MAJOR OF STUDY</b></label>
+      <select v-model="user.major._id" class="selection" required>
+        <option value="default">Please Select</option>
+        <option v-for="major in majors" :value="major._id">{{ major.majorName }}</option>
       </select>
 
-      <input class="user-account-input" type="text" placeholder="Graduation Year" name="grad-year" required>
-
-      <textarea class="user-account-input" type="text" name="subject" placeholder="Spice up your bio..." style="height:200px"></textarea>
-
-      <input class="user-account-input" type="password" placeholder="Current Password" name="password" required>
-      <input class="user-account-input" type="password" placeholder="New Password" name="password" required>
-      <input class="user-account-input" type="password" placeholder="Confirm New Password" name="password" required>
+      <label v-bind:class="{ error: Object.keys(errors).includes('gradYear') }" for="gradYear"><b>Graduation Year</b></label>
+        <br>
+        <select v-model="user.gradYear" class="selection">
+          <option value="default">Please Select</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+        <br>
+      
+      <label v-bind:class="{ error: Object.keys(errors).includes('bio') }" for="bio"><b>WRITE A SHORT BIOGRAPHY</b></label>
+      <textarea v-model="user.bio" class="user-account-input" type="text" name="subject" placeholder="Spice up your bio..." style="height:200px"></textarea>
 
     </div>
 
@@ -34,7 +79,8 @@
       <button type="button" class="user-account-button-cancel"><b>CANCEL</b></button>
       <button type="submit" class="user-account-button"><b>UPDATE PROFILE</b></button>
     </div>
-
+</form>
+</div >
 </div >
 </template>
 
