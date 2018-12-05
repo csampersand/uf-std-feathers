@@ -32,7 +32,7 @@ export default {
                     _id: this.$route.params.majorId
                 }
             }).then(posts => this.posts = posts.data);
-                this.major = major.data[0]);
+                this.major = major.data[0];
             }
             else{
                 this.major = null;
