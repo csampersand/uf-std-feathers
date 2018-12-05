@@ -34,19 +34,23 @@
 
 <template>
 <div class="body-signup">
-  <form style="border:1px solid #ccc" v-on:submit.prevent="register">
+  <form v-on:submit.prevent="register">
 
-  <div class="container">
+  <div class="jumbotron" style="border:3px solid #ccc;">
     <center>
       <h1><b>SIGN UP</b></h1>
     </center>
-    <hr class="hr-signup">
+    <hr style="border:2px solid #ccc; color: #ccc; margin-bottom: 10px">
 
     <label v-bind:class="{ error: Object.keys(errors).includes('fname') }" for="fname"><b>FIRST NAME</b></label>
-    <input v-model="user.fname" class="input-signup" type="text" placeholder="Enter Your First Name" name="first-name" required>
+    <input v-model="user.fname" class="form-control" type="text" placeholder="Enter Your First Name" name="first-name" required>
+
+    <div style="padding-bottom: 20px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('lname') }" for="lname"><b>LAST NAME</b></label>
-    <input v-model="user.lname" class="input-signup" type="text" placeholder="Enter Your Last Name" name="last-name" required>
+    <input v-model="user.lname" class="form-control" type="text" placeholder="Enter Your Last Name" name="last-name" required>
+
+    <div style="padding-bottom: 20px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('major') }" for="major"><b>MAJOR OF STUDY</b></label>
     <br>
@@ -55,6 +59,8 @@
       <option v-for="major in majors" :value="major._id">{{ major.majorName }}</option>
     </select>
     <br>
+
+    <div style="padding-bottom: 8px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('gradYear') }" for="gradYear"><b>Graduation Year</b></label>
     <br>
@@ -70,22 +76,32 @@
     <br>
     <!-- <input class="input-signup" type="text" placeholder="Enter Your Major of Study" name="major" required> -->
 
+    <div style="padding-bottom: 8px;"></div>
+
     <label v-bind:class="{ error: Object.keys(errors).includes('email') }" for="email"><b>UFL EMAIL</b></label>
-    <input v-model="user.email" class="input-signup" type="text" placeholder="your_ufl@ufl.edu" name="email"  pattern="[a-z0-9._%+-]+@ufl.edu$" title="Please provide a valid ufl email" required>
+    <input v-model="user.email" class="form-control" type="text" placeholder="your_ufl@ufl.edu" name="email"  pattern="[a-z0-9._%+-]+@ufl.edu$" title="Please provide a valid ufl email" required>
+
+    <div style="padding-bottom: 20px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('password') }" for="password"><b>PASSWORD</b></label>
-    <input v-model="user.password" class="input-signup" type="password" placeholder="Enter Password" name="psw" required>
+    <input v-model="user.password" class="form-control" type="password" placeholder="Enter Password" name="psw" required>
+
+    <div style="padding-bottom: 20px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('bio') }" for="bio"><b>WRITE A SHORT BIOGRAPHY</b></label>
-    <textarea v-model="user.bio" class="input-signup" type="text" name="subject" placeholder="Write your life story..." style="height:200px"></textarea>
+    <textarea v-model="user.bio" class="form-control" type="text" name="subject" placeholder="Write your life story..." style="height:200px"></textarea>
+
+    <div style="padding-bottom: 20px;"></div>
 
     <label v-bind:class="{ error: Object.keys(errors).includes('public') }" for="public">
       <input v-model="user.public" type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Make my profile public.
     </label>
 
+    <div style="padding-bottom: 30px;"></div>
+
     <div class="clearfix">
-      <button type="button" class="cancel-button"><b>CANCEL</b></button>
-      <button type="submit" class="signup-button"><b>CREATE</b></button>
+      <button type="button" class="btn btn-danger" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
+      <button type="submit" class="btn btn-success" style="font-size : 17px;float: right; width: 48%; padding: 14px 20px;"><b>CREATE</b></button>
     </div>
 
   </div>
