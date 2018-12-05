@@ -41,7 +41,7 @@ export default {
         },
         follow(userId){
             this.$emit('follow',userId);
-     },
+        },
         unfollow(userId){
             this.$emit('unfollow',userId);
         }
