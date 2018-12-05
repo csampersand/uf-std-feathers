@@ -153,9 +153,20 @@ async function seed(name, data) {
             return createdUsers;
 
     })
+    .then(async function(users){
+        console.log("\n Users: ", users);
+
+        var updatedUsers = [];
+        for(var i = 0;i < users.length;i++){
+            users[i].following.push(shuffle(users)[0]._id);
+            updatedUsers.push(await userService.patch(users[i]._id,users[i]));
+        }
+        console.log("\n Updated Users: ", updatedUsers);
+
+        return updatedUsers;
+    })
     .then(async function(createdUsers){
 
-        console.log("\n Users: ", createdUsers);
 
         // Making 20 posts and assigning them random users as creators
         for(var i = 0; i < 50;i++){
