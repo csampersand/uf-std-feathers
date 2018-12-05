@@ -32,6 +32,12 @@ export default {
             if (this.majorId) {
                 services.majorService.get(this.majorId).then(major => this.major = major);
             }
+        },
+        follow(userId){
+            this.$emit('follow',userId);
+        },
+        unfollow(userId){
+            this.$emit('unfollow',userId);
         }
     },
     components: {
@@ -52,7 +58,9 @@ export default {
                     :key="post._id"
                     v-bind:major="major"
                     v-bind:post="post"
-                    v-bind:user="user">
+                    v-bind:user="user"
+                    v-on:follow="follow"
+                    v-on:unfollow="unfollow">
                 </post>
             </div>
         </div>
