@@ -7,7 +7,7 @@
 <template>
   <div class="jumbotron" style="padding-top:10px; padding-bottom:10px;">
     <h4 class="h2">{{ post.title }}</h4>
-    <h6 class="blog-text"><i>posted by </i><b>{{ post.author.fname }} {{ post.author.lname }}</b></h6>
+    <router-link class="dropdown-item" :to="{ name:'blog', params: { userId: post.author._id} }" href="#"><i>posted by </i><b>{{ post.author.fname }} {{ post.author.lname }}</b></router-link>
     <hr style="width: 90%;">
 
     <p class="blog-text">

@@ -32,7 +32,7 @@ export default {
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                       <router-link class="dropdown-item" to="/profile" href="#">Profile</router-link>
-                      <router-link class="dropdown-item" to="/" href="#">My Blog</router-link>
+                      <router-link class="dropdown-item" :to="{ name:'blog', params: { userId: user._id} }" href="#">My Blog</router-link>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" v-on:click="$emit('logout')">Logout</a>
                     </div>

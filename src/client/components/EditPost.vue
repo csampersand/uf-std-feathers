@@ -13,7 +13,7 @@
         </div>
         <hr style="width: 90%;">
         <div class="form-group">
-          <textarea class="form-control" rows="3" maxlength="250" placeholder="say something else..."required></textarea>
+          <textarea class="form-control" rows="3" maxlength="250" placeholder="say something else..." required></textarea>
         </div>
         <div class="clearfix">
           <button type="button" class="btn btn-success btn-lg">UPDATE</button>
