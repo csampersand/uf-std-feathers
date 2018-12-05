@@ -3,14 +3,21 @@
 import * as services from '../services'
 
 import Post from './Post.vue'
+import Sidebar from './Sidebar.vue'
 
 export default {
     props: ['user'],
     data() {
         return {
-            posts: null
+            posts: null,
+            major: null
         }
     },
+    watch: {
+    '$route.params.majorId': function () {
+      this.getMajors()
+    }
+  },
     created() {
         this.getPosts();
     },
@@ -20,9 +27,24 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
-            }).then(posts => this.posts = posts.data);
+            }).then(posts =>
+            this.posts = posts.data);
+        },
+        getMajors(){
+            if(this.$route.params.majorId){
+                services.majorService.find({
+                query:{
+                    _id: this.$route.params.majorId
+                }
+            }).then(major =>
+                this.major = major.data[0]);
+            }
+            else{
+                this.major = null;
+            }
+
         }
-    },
+     },
     components: {
         Post
     }
@@ -31,12 +53,16 @@ export default {
 <template>
     <div>
         <div class="box-frame">
-          <h1 class="display-3" style="padding-bottom:20px;"><b>Major</b></h1>
+          <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
+              <b>{{major.majorName}}</b>
+              </h1>
+            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>All Posts</b></h1>
 
             <post
                 v-if="posts && user"
                 v-for="post in posts"
                 :key="post._id"
+                v-bind:major="major"
                 v-bind:post="post"
                 v-bind:user="user">
             </post>

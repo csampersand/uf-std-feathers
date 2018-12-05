@@ -4,7 +4,7 @@
     export default {
         data() {
             return {
-                majors: [],
+                majors: []
             }
         },
         created() {
@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li v-for="major in majors">
-                <a href="#">{{ major.majorName }}</a>
+                <router-link :to="{ name:'explore', params: { majorId: major._id} }">{{ major.majorName }}</router-link>
             </li>
         </ul>
     </div>

@@ -21,7 +21,7 @@ export default {
                     <router-link v-if="user" class="nav-link" to="/feed">Your Feed</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/explore">Explore</router-link>
+                    <router-link v-if="user" class="nav-link" to="/explore">Explore</router-link>
                 </li>
             </ul>
             <ul class="navbar-nav">

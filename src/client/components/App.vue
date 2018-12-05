@@ -8,7 +8,7 @@
     export default {
         data() {
             return {
-                user: null
+                user: null,
             }
         },
         created() {
@@ -61,7 +61,7 @@
                                 timer: 2000
                             });
                         }
-                        this.$router.push('/feed');
+                        this.$router.push('/explore');
                     })
                     .catch(error => {
                         swal("Uh oh!", "We couldn't log you in. Please try again.", "error", {
@@ -96,7 +96,9 @@
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
         <div id="wrapper" v-bind:class="{ toggled: user }">
-            <sidebar></sidebar>
+            <sidebar>
+
+            </sidebar>
             <router-view id="page-content-wrapper"
                 v-on:login="login"
                 v-bind:user="user"></router-view>
