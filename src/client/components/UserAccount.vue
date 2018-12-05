@@ -52,7 +52,13 @@ import Post from './Post.vue'
         } else {
           x.innerHTML = "COMMENT";
         }
-      }
+      },
+        follow(userId){
+            this.$emit('follow',userId);
+     },
+        unfollow(userId){
+            this.$emit('unfollow',userId);
+        }
     },
     components: {
         Post
@@ -94,7 +100,9 @@ import Post from './Post.vue'
             v-if="author._id == post.author._id"
             :key="post._id"
             v-bind:post="post"
-            v-bind:user="user">
+            v-bind:user="user"
+            v-on:follow="follow"
+            v-on:unfollow="unfollow">>
         </post>
     </div>
     <div class="col"></div>
