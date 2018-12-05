@@ -56,7 +56,7 @@ export default {
           <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
               <b>{{major.majorName}}</b>
               </h1>
-            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>All Posts</b></h1>
+            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Explore</b></h1>
             <div v-if="posts && user">
                 <post
                     v-if="major == null || post.author.major._id == major._id"
