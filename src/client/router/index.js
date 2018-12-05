@@ -9,6 +9,7 @@ import * as services from '../services'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Explore from '../components/Explore.vue'
+import Major from '../components/Major.vue'
 import Feed from '../components/Feed.vue'
 import Profile from '../components/EditUser.vue'
 
@@ -17,6 +18,7 @@ Vue.component('Register', Register);
 Vue.component('Explore', Explore);
 Vue.component('Feed', Feed);
 Vue.component('Profile', Profile);
+Vue.component('Major', Major);
 
 // VUE ROUTING
 
@@ -33,9 +35,9 @@ const About = { template: '<h1>About UF-STD</h1>'}
 export default new Router({
     routes: [
         { path: '/', component: About},
+        { path: '/feed', component: Feed },
         { path: '/explore', component: Explore },
-        { path: '/explore/:majorId', component: Explore, props: true },
-        { path: '/feed',name:"feed", component: Feed , props: true},
+        { path: '/explore/:majorId?', component: Major, props: true },
         { path: '/profile', component: Profile },
 
         // Auth pages

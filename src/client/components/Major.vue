@@ -15,6 +15,10 @@ export default {
     },
     created() {
         this.getPosts();
+        this.getMajor();
+    },
+    updated() {
+        this.getMajor();
     },
     methods: {
         getPosts() {
@@ -23,6 +27,11 @@ export default {
                     $sort: { updatedAt: -1 }
                 }
             }).then(posts => this.posts = posts.data);
+        },
+        getMajor() {
+            if (this.majorId) {
+                services.majorService.get(this.majorId).then(major => this.major = major);
+            }
         }
     },
     components: {
@@ -36,7 +45,6 @@ export default {
           <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
               <b>{{major.majorName}}</b>
               </h1>
-            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Explore</b></h1>
             <div v-if="posts && user">
                 <post
                     v-if="major == null || post.author.major._id == major._id"
