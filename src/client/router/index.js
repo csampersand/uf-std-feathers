@@ -13,14 +13,13 @@ import Major from '../components/Major.vue'
 import Feed from '../components/Feed.vue'
 import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
-import Profile from '../components/EditUser.vue'
+import Profile from '../components/Profile.vue'
 import Admin from '../components/Admin.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
 Vue.component('Explore', Explore);
 Vue.component('Feed', Feed);
-// Vue.component('Profile', Profile);
 Vue.component('Blog', Blog);
 Vue.component('About', About);
 Vue.component('Profile', Profile);

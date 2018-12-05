@@ -13,7 +13,7 @@
             services.userService.find().then(user => this.users = user.data);
             services.majorService.find().then(major => this.majors = major.data);
         },
-        methods: {  
+        methods: {
             listView() {
               var elements = document.getElementsByClassName("column");
               for (var i = 0; i < elements.length; i++) {
@@ -51,26 +51,6 @@
 
 <template>
 <div>
-  <div class="user-account-body">
-      <div v-if="user" class="user-account-card">
-
-        <h1>{{ user.fname }} {{ user.lname }} </h1>
-        <p class="user-account-title">Head of {{ user.major.majorName }}</p>
-        <p style="text-align:left; padding-left:10px; padding-right:10px;">
-          <b>Bio: </b>
-          {{ user.bio }}
-         </p>
-
-        <a class="user-account-a" href="http://instagram.com"><i class="fa fa-instagram" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://twitter.com"><i class="fa fa-twitter" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://linkedin.com"><i class="fa fa-linkedin" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://facebook.com"><i class="fa fa-facebook" style="font-size:40px"></i></a>
-      </div>
-    </div>
-
-    <!-- BLOG POST -->
-    <div style="float: right; width: 65%;">
-
       <!-- Buttons to choose list or grid view -->
       <button v-on:click="listView()" type="button" class="btn btn-primary" style="width:49%;"><i class="fa fa-bars"></i> List</button>
       <button v-on:click="gridView()" type="button" class="btn btn-info" style="width:49%; float:right;"><i class="fa fa-th-large"></i> Grid</button>
