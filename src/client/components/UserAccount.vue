@@ -64,7 +64,8 @@ import Post from './Post.vue'
 
 <template>
 <div v-if="author && user">
-    <div v-if="author.major" style="float:left; padding-top: 15px; padding-left: 15px;">
+    <div class="row">
+    <div class="col" v-if="author.major" style="float:left; padding-top: 15px; padding-left: 15px;">
 
       <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); max-width: 300px; margin: 10px; text-align: center;" >
 
@@ -97,7 +98,7 @@ import Post from './Post.vue'
         </post>
     </div>
     <div class="col"></div>
-
+    </div>
 
 </div>
 
