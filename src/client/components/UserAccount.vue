@@ -33,7 +33,6 @@ import * as services from '../services'
         getUser(){
             if(this.$route.params.userId){
                 services.userService.get(this.$route.params.userId).then(author => this.author = author);
-                services.majorService.get(this.author.major).then(major => this.author.major = major);
             }
         },
         swapText() {
