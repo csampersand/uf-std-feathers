@@ -23,9 +23,13 @@ export default {
                 <li class="nav-item">
                     <router-link v-if="user" class="nav-link" to="/explore">Explore</router-link>
                 </li>
+                <li v-if="user.isAdmin" class="nav-item" style="float: right;">
+                    <router-link class="nav-link" to="/admin" href="#">Admin</router-link>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <div v-if="user">
+                
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Account
@@ -33,6 +37,7 @@ export default {
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                       <router-link class="dropdown-item" to="/profile" href="#">Profile</router-link>
                       <router-link class="dropdown-item" :to="{ name:'blog', params: { userId: user._id} }" href="#">My Blog</router-link>
+                      <router-link class="dropdown-item" to="/" href="#">My Blog</router-link>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" v-on:click="$emit('logout')">Logout</a>
                     </div>

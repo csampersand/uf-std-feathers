@@ -1,36 +1,65 @@
 <script>
-      // Get the elements with class="column"
-    var elements = document.getElementsByClassName("column");
-    var i;
-
-    function listView() {
-        for (i = 0; i < elements.length; i++) {
-            elements[i].style.width = "100%";
-        }
-    }
-
-    function gridView() {
-        for (i = 0; i < elements.length; i++) {
-             elements[i].style.width = "33.3%";
+    import * as services from '../services'
+    export default {
+        props: ['user'],
+        data() {
+          return {
+                users: [],
+                majors: [],
+                errors: []
+            }
+        },
+        created() {
+            services.userService.find().then(user => this.users = user.data);
+            services.majorService.find().then(major => this.majors = major.data);
+        },
+        methods: {  
+            listView() {
+              var elements = document.getElementsByClassName("column");
+              for (var i = 0; i < elements.length; i++) {
+                elements[i].style.width = "100%";
+              }
+            },
+            gridView() {
+              var elements = document.getElementsByClassName("column");
+              for (var i = 0; i < elements.length; i++) {
+                elements[i].style.width = "33.3%";
+              }
+            },
+            getMajor(majorId){
+              var major = this.majors.find(major => major._id === majorId);
+              return major.majorName;
+            },
+            deleteUser(userId) {
+                services.userService.remove(userId).then(() => {
+                  swal("User Deleted!", "success", {
+                      buttons: false,
+                      timer: 2000
+                  });
+                  services.userService.find().then(user => this.users = user.data);
+                }).catch(error => {
+                    this.errors = error.errors;
+                    swal("Uh oh!", "We couldn't delete the user. Please try again.", "error", {
+                        buttons: false,
+                        timer: 2000
+                    });
+                })
+            }
         }
     }
 </script>
 
 <template>
+<div>
+  <div class="user-account-body">
+      <div v-if="user" class="user-account-card">
 
-<div class="user-account-body">
-      <img class="user-account-img" src="./img/blank-profile-img.png">
-
-      <div class="user-account-card">
-
-        <h1>Admin</h1>
-        <p class="user-account-title">Head of Major</p>
+        <h1>{{ user.fname }} {{ user.lname }} </h1>
+        <p class="user-account-title">Head of {{ user.major.majorName }}</p>
         <p style="text-align:left; padding-left:10px; padding-right:10px;">
           <b>Bio: </b>
-        This is the student from Harvard University. This is the student from Harvard University.
-        This is the student from Harvard University. This is the student from Harvard University.
-        This is the student from Harvard University. This is the student from Harvard University.
-        This is the student from Harvard University. This is the student from Harvard University. </p>
+          {{ user.bio }}
+         </p>
 
         <a class="user-account-a" href="http://instagram.com"><i class="fa fa-instagram" style="font-size:40px"></i></a>
         <a class="user-account-a" href="http://twitter.com"><i class="fa fa-twitter" style="font-size:40px"></i></a>
@@ -40,56 +69,27 @@
     </div>
 
     <!-- BLOG POST -->
-    <div class="box-frame">
+    <div style="float: right; width: 65%;">
 
       <!-- Buttons to choose list or grid view -->
-      <button onclick="listView()" type="button" class="btn btn-primary" style="width:49%;"><i class="fa fa-bars"></i> List</button>
-      <button onclick="gridView()" type="button" class="btn btn-info" style="width:49%; float:right;"><i class="fa fa-th-large"></i> Grid</button>
+      <button v-on:click="listView()" type="button" class="btn btn-primary" style="width:49%;"><i class="fa fa-bars"></i> List</button>
+      <button v-on:click="gridView()" type="button" class="btn btn-info" style="width:49%; float:right;"><i class="fa fa-th-large"></i> Grid</button>
       <div style="margin-bottom:15px;"></div>
       <div class="row">
-        <div class="column">
+        <div v-for="user in users" class="column">
           <div class="card border-dark mb-3">
-            <div class="card-header">Username</div>
+            <div class="card-header">{{ user.email }}</div>
             <div class="card-body">
-              <h4 class="card-title">Last Name, First Name</h4>
-              <h5>Major, Year</h5>
-              <p class="card-text"><b>Bio: </b>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card border-dark mb-3">
-            <div class="card-header">Username</div>
-            <div class="card-body">
-              <h4 class="card-title">Last Name, First Name</h4>
-              <h5>Major, Year</h5>
-              <p class="card-text"><b>Bio: </b>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card border-dark mb-3" ">
-            <div class="card-header">Username</div>
-            <div class="card-body">
-              <h4 class="card-title">Last Name, First Name</h4>
-              <h5>Major, Year</h5>
-              <p class="card-text"><b>Bio: </b>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card border-dark mb-3"">
-            <div class="card-header">Username</div>
-            <div class="card-body">
-              <h4 class="card-title">Last Name, First Name</h4>
-              <h5>Major, Year</h5>
-              <p class="card-text"><b>Bio: </b>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h4 class="card-title">{{ user.fname }}, {{ user.lname }}</h4>
+              <h5>{{ getMajor(user.major) }}, {{ user.gradYear }}</h5>
+              <p class="card-text"><b>Bio: </b>{{ user.bio }}</p>
+              <button v-on:click="deleteUser(user._id)" type="button" class="btn btn-danger" style=""><i class="fa fa-bars"></i>Delete</button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+</div>
 
 
 </template>
@@ -115,7 +115,7 @@
 
 .user-account-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 350px;
+    max-width: 300px;
     margin: auto;
     text-align: center;
 }
@@ -142,97 +142,6 @@
     text-decoration: none;
     font-size: 22px;
     color: black;
-}
-
-.user-account-button:hover, a:hover {
-    opacity: 0.7;
-}
-
-
-/* BLOG POST */
-.box-frame {
-  margin: auto;
-  border: none;
-  background-color: white;
-  float: right;
-  width: 70%;
-  padding: 20px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 100%;
-}
-
-.blog-post-frame {
-  position: relative;
-  width: 100%;
-  height: relative;
-  background-color: lightgrey;
-  border: 2px solid darkgray;
-
-}
-
-.blog-post-title {
-  padding-top: 12px;
-  padding-left: 12px;
-}
-
-.blog-text {
-  padding-top: 0px;
-  padding-left: 0px;
-}
-
-.user-account-button-comment {
-    border: none;
-    float: left;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: grey;
-    text-align: center;
-    cursor: pointer;
-    width: 80%;
-    font-size: 18px;
-}
-
-.user-account-button-report {
-    border: none;
-    float: left;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: darkgray;
-    text-align: center;
-    cursor: pointer;
-    width: 20%;
-    font-size: 18px;
-}
-
-.user-account-button:hover {
-    opacity: 0.7;
-    background-color: darkred;
-}
-
-.user-account-button-comment:hover {
-    opacity: 0.7;
-    background-color: green;
-}
-.user-account-button-report:hover {
-    opacity: 0.7;
-    background-color: darkred;
-}
-
-.blog-post-comment {
-  margin: auto;
-  position: relative;
-  float: inherit;
-  width: 95%;
-  height: relative;
-  background-color: lightgrey;
-  border: 2px solid darkgray;
-
 }
 
 /* Create two equal columns that floats next to each other */
