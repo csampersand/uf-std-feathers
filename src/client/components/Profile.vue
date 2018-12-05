@@ -34,23 +34,23 @@
 
 <template>
 <div >
-<div >
+<div class="container">
 
   <form class="jumbotron" style="border:3px solid #ccc" v-on:submit.prevent="register">
 
+    <h1><center>Edit Profile</center></h1>
     <hr style="border:2px solid #ccc; color: #ccc; margin-bottom: 10px">
-    <h1>Edit Profile</h1>
 
     <div v-if="user" style="text-align:left; padding-top:15px; padding-left:10px; padding-right:10px; width:100%;">
 
       <label v-bind:class="{ error: Object.keys(errors).includes('fname') }" for="fname"><b>FIRST NAME</b></label>
-      <input v-model="user.fname" class="form-control" type="text" placeholder="First Name" name="first-name" required>
+      <input v-model="user.fname" style="margin-bottom: 15px;" class="form-control" type="text" placeholder="First Name" name="first-name" required>
 
       <label v-bind:class="{ error: Object.keys(errors).includes('lname') }" for="lname"><b>LAST NAME</b></label>
-      <input v-model="user.lname" class="user-account-input" type="text" placeholder="Last Name" name="last-name" required>
+      <input v-model="user.lname" style="margin-bottom: 15px;" class="form-control" type="text" placeholder="Last Name" name="last-name" required>
 
       <label v-bind:class="{ error: Object.keys(errors).includes('email') }" for="email"><b>EMAIL</b></label>
-      <input v-model="user.email" class="form-control" type="text" placeholder="Email" name="email" required>
+      <input v-model="user.email" style="margin-bottom: 15px;" class="form-control" type="text" placeholder="Email" name="email" required>
 
       <label v-bind:class="{ error: Object.keys(errors).includes('major') }" for="major"><b>MAJOR OF STUDY</b></label>
       <select v-model="user.major._id" class="selection" required>
@@ -84,7 +84,7 @@
     <div style="padding-bottom: 40px;"></div>
 
     <div class="clearfix">
-      <button type="button" class="btn btn-warning" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
+      <button v-on:click="$router.go(-1)" type="button" class="btn btn-warning" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
       <button type="submit" class="btn btn-success" style="font-size : 17px;float: right; width: 48%; padding: 14px 20px;"><b>UPDATE PROFILE</b></button>
     </div>
 </form>

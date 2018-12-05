@@ -33,30 +33,30 @@
             banUser(user) {
                 user.isBanned = true;
                 services.userService.patch(user._id, user).then(() => {
-                  swal("User Deleted!", "success", {
+                  swal("User banned!", "Successfully banned the user.", "success", {
                       buttons: false,
                       timer: 2000
                   });
                   services.userService.find().then(user => this.users = user.data);
                 }).catch(error => {
                     this.errors = error.errors;
-                    swal("Uh oh!", "We couldn't delete the user. Please try again.", "error", {
+                    swal("Uh oh!", "We couldn't ban the user. Please try again.", "error", {
                         buttons: false,
                         timer: 2000
                     });
                 })
             },
-            unBanUser(user) {
+            unbanUser(user) {
                 user.isBanned = false;
-                services.userService.patch(user_id, user).then(() => {
-                  swal("User Deleted!", "success", {
+                services.userService.patch(user._id, user).then(() => {
+                  swal("User unbanned!", "Successfully unbanned the user.", "success", {
                       buttons: false,
                       timer: 2000
                   });
                   services.userService.find().then(user => this.users = user.data);
                 }).catch(error => {
                     this.errors = error.errors;
-                    swal("Uh oh!", "We couldn't delete the user. Please try again.", "error", {
+                    swal("Uh oh!", "We couldn't unban the user. Please try again.", "error", {
                         buttons: false,
                         timer: 2000
                     });
@@ -73,14 +73,17 @@
       <button v-on:click="gridView()" type="button" class="btn btn-info" style="width:49%; float:right;"><i class="fa fa-th-large"></i> Grid</button>
       <div style="margin-bottom:15px;"></div>
       <div class="row">
-        <div v-for="user in users" class="column">
-          <div v-bind:class="{'card text-white bg-danger mb-3': user.isBanned, 'card border-dark mb-3': !user.isBanned}">
-            <div class="card-header">{{ user.email }}</div>
+        <div v-for="_user in users" class="column">
+          <div v-bind:class="{'card text-white bg-danger mb-3': _user.isBanned, 'card border-dark mb-3': !_user.isBanned}">
+            <div class="card-header">{{ _user.email }}</div>
             <div class="card-body">
-              <h4 class="card-title">{{ user.fname }}, {{ user.lname }}</h4>
-              <h5>{{ getMajor(user.major) }}, {{ user.gradYear }}</h5>
-              <p class="card-text"><b>Bio: </b>{{ user.bio }}</p>
-              <button v-on:click="banUser(user)" type="button" class="btn btn-warning" style="float: right"><i class="fa fa-bars"></i>Ban</button>
+              <h4 class="card-title">{{ _user.fname }}, {{ _user.lname }}</h4>
+              <h5>{{ getMajor(_user.major) }}, {{ _user.gradYear }}</h5>
+              <p class="card-text"><b>Email: </b>{{ _user.email }}</p>
+              <p class="card-text"><b>Created: </b>{{ _user.createdAt }}</p>
+              <p class="card-text"><b>Modified: </b>{{ _user.updatedAt }}</p>
+              <button v-if="!_user.isBanned" v-on:click="banUser(_user)" type="button" class="btn btn-warning" style="float: right"><i class="fa fa-bars"></i>Ban</button>
+              <button v-else v-on:click="unbanUser(_user)" type="button" class="btn btn-info" style="float: right"><i class="fa fa-bars"></i>Unban</button>
             </div>
           </div>
         </div>
