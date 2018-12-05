@@ -22,9 +22,31 @@ export default {
                 query: {
                     $sort: { updatedAt: -1 }
                 }
+            }).then(posts =>
+            this.posts = posts.data);
+        },
+        getMajors(){
+            if(this.$route.params.majorId){
+                services.majorService.find({
+                query:{
+                    _id: this.$route.params.majorId
+                }
             }).then(posts => this.posts = posts.data);
+                this.major = major.data[0]);
+            }
+            else{
+                this.major = null;
+            }
+
+        },
+        follow(userId){
+            this.$emit('follow',userId);
+     },
+        unfollow(userId){
+            this.$emit('unfollow',userId);
         }
     },
+
     components: {
         Post
     }
@@ -44,7 +66,9 @@ export default {
                     :key="post._id"
                     v-bind:major="major"
                     v-bind:post="post"
-                    v-bind:user="user">
+                    v-bind:user="user"
+                    v-on:follow="follow"
+                    v-on:unfollow="unfollow">
                 </post>
             </div>
         </div>

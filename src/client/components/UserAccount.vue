@@ -63,8 +63,8 @@ import Post from './Post.vue'
 </script>
 
 <template>
-<div v-if="author" class="row">
-    <div v-if="author.major" class="col">
+<div v-if="author && user">
+    <div v-if="author.major" style="float:left; padding-top: 15px; padding-left: 15px;">
 
       <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); max-width: 300px; margin: 10px; text-align: center;" >
 
@@ -73,10 +73,13 @@ import Post from './Post.vue'
         <p style="text-align:left; padding-left:10px; padding-right:10px;">
           <b>Bio: </b>
             {{author.bio}}
-        <a class="user-account-a" href="http://instagram.com"><i class="fa fa-instagram" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://twitter.com"><i class="fa fa-twitter" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://linkedin.com"><i class="fa fa-linkedin" style="font-size:40px"></i></a>
-        <a class="user-account-a" href="http://facebook.com"><i class="fa fa-facebook" style="font-size:40px"></i></a>
+
+        <!-- <p><button type="button" class="btn btn-danger" style="width:80%;"><b>Follow</b></button></p> -->
+        <p>
+            <button v-if="(user._id != author._id) && !user.following.includes(author._id)" type="button" class="btn btn-primary" style="width:80%;" v-on:click="$emit('follow', author._id)"><b>Follow</b></button>
+            <button v-else-if="(user._id != author._id) && user.following.includes(author._id)" type="button" class="btn btn-danger" style="width:80%;" v-on:click="$emit('unfollow', author._id)"><b>Unfollow</b></button>
+
+        </p>
 
         <p><button type="button" class="btn btn-danger" style="width:80%; margin-bottom:20px;"><b>Report User</b></button></p>
 

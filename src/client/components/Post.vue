@@ -59,6 +59,9 @@
   <div v-if="!deleted" class="jumbotron" style="padding-top:10px; padding-bottom:10px;">
     <h4 v-if="!editing" class="h2">{{ post.title }}</h4>
     <input v-else class="form-control" v-model="post.title"></input>
+    <button v-if="(user._id != post.author._id) && !user.following.includes(post.author._id)" type="button" class="btn btn-primary btn-xs"  v-on:click="$emit('follow', post.author._id)">Follow</button>
+    <button v-else-if="(user._id != post.author._id) && user.following.includes(post.author._id)" type="button" class="btn btn-danger btn-xs" v-on:click="$emit('unfollow', post.author._id)">Unfollow</button>
+
     <i>posted by </i> <router-link :to="{ name:'blog', params: { userId: post.author._id} }" href="#"><b>{{ post.author.fname }} {{ post.author.lname }}</b></router-link>
     <hr style="width: 90%;">
 
