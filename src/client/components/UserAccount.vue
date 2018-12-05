@@ -63,6 +63,7 @@ import Post from './Post.vue'
     components: {
         Post
     }
+
 }
 
 
