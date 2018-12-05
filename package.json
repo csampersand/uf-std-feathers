@@ -23,9 +23,6 @@
     "npm": ">= 3.0.0"
   },
   "nodemonConfig": {
-    "ignore": [
-      "public/*"
-    ],
     "events": {
       "restart": "npx webpack --config webpack.config.js"
     }
