@@ -26,13 +26,17 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const major = user.major;
         var following = [];
 
+        if(!email.endsWith("ufl.edu") && context.params.provider != undefined){
+            throw new Error('Must sign up with a ufl email');
+        }
+
         if (method === 'update') {
             following = user.following;
         }
         else if (method === 'create'){
             following = []
         }
-        
+
         // Override the user data (so that people can't become admin)
         context.data = {
             email,
