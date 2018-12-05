@@ -100,7 +100,7 @@
     <div style="padding-bottom: 30px;"></div>
 
     <div class="clearfix">
-      <button type="button" class="btn btn-danger" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
+      <button v-on:click="$router.push('/')" type="button" class="btn btn-danger" style="font-size : 17px;float: left; width: 48%; padding: 14px 20px;"><b>CANCEL</b></button>
       <button type="submit" class="btn btn-success" style="font-size : 17px;float: right; width: 48%; padding: 14px 20px;"><b>CREATE</b></button>
     </div>
 

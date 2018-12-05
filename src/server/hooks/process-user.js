@@ -24,6 +24,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const bio = user.bio;
         const password = user.password;
         const major = user.major;
+        const isBanned = user.isBanned;
         var following = [];
 
         if(!email.endsWith("ufl.edu") && context.params.provider != undefined){
@@ -48,7 +49,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             isAdmin: adminBool,
             password,
             major,
-            following
+            following,
+            isBanned
             };
 
         // Best practice: hooks should always return the context

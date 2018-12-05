@@ -88,7 +88,8 @@ import Post from './Post.vue'
 
         </p>
 
-        <p><button type="button" class="btn btn-danger" style="width:80%; margin-bottom:20px;"><b>Report User</b></button></p>
+        <p><button v-if="author._id != user._id" type="button" class="btn btn-danger" style="width:80%; margin-bottom:20px;"><b>Report User</b></button></p>
+        <p><button v-if="author._id == user._id" type="button" class="btn btn-success" style="width:80%; margin-bottom:20px;"><b>New Blog Post</b></button></p>
 
       </div>
     </div>
