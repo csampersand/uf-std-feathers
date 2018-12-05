@@ -74,7 +74,6 @@
       <div v-if="!editing" style="float:right;">
         <button v-if="user._id == post.author._id || user.isAdmin" type="button" v-on:click="editing = true" class="btn btn-info btn-lg">Edit</button>
         <button v-if="user._id == post.author._id || user.isAdmin" type="button" class="btn btn-danger btn-lg" v-on:click="deletePost">Delete</button>
-        <button type="button" class="btn btn-warning btn-lg">Report</button>
       </div>
       <div v-else style="float:right;">
         <button v-on:click="editing=false" class="btn btn-error btn-lg">Cancel</button>
