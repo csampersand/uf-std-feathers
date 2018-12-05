@@ -4,7 +4,7 @@
     export default {
         data() {
             return {
-                majors: [],
+                majors: []
             }
         },
         created() {
@@ -13,6 +13,8 @@
         }
     }
 </script>
+
+<div class="class1 class2"></div>
 
 <template>
     <!-- Sidebar -->
@@ -24,7 +26,8 @@
                 </a>
             </li>
             <li v-for="major in majors">
-                <a href="#">{{ major.majorName }}</a>
+                <!-- <router-link class="side-item" :to="{ name:'explore', params: { majorId: major._id} }">{{ major.majorName }}</router-link> -->
+                <router-link class="side-item" v-on:click="emit(majorSelected)" :to="{ path: '/explore/' + major._id }">{{ major.majorName }}</router-link>
             </li>
         </ul>
     </div>
@@ -100,10 +103,14 @@ body {
   line-height: 40px;
 }
 
+.side-item.router-link-active {
+    color: #FFFFFF !important;
+}
+
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #77AEFF;
 }
 
 .sidebar-nav li a:hover {

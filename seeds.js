@@ -76,7 +76,7 @@ async function seed(name, data) {
 
         users = [
             {
-              email:"carlos@gmail.com",
+              email:"carlos@ufl.edu",
               fname:"Carlos",
               lname: "Avogadro",
               gradYear:"2020",
@@ -87,7 +87,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"james@gmail.com",
+              email:"james@ufl.edu",
               fname:"James",
               lname: "Hollnad",
               gradYear:"2022",
@@ -98,7 +98,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"jake@gmail.com",
+              email:"jake@ufl.edu",
               fname:"Jake",
               lname: "StateFarm",
               gradYear:"2018",
@@ -109,7 +109,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"jane@gmail.com",
+              email:"jane@ufl.edu",
               fname:"Jane",
               lname: "Doe",
               gradYear:"2021",
@@ -120,7 +120,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"mike@gmail.com",
+              email:"mike@ufl.edu",
               fname:"Mike",
               lname: "Arboleda",
               gradYear:"2020",
@@ -131,7 +131,7 @@ async function seed(name, data) {
               major : shuffle(createdMajors)[0]._id
           },
           {
-              email:"admin@gmail.com",
+              email:"admin@ufl.edu",
               fname:"Travis",
               lname: "Scott",
               gradYear:"2020",
@@ -153,12 +153,24 @@ async function seed(name, data) {
             return createdUsers;
 
     })
+    .then(async function(users){
+        console.log("\n Users: ", users);
+
+        var updatedUsers = [];
+        for(var i = 0;i < users.length;i++){
+            users[i].following.push(shuffle(users)[0]._id);
+            users[i].following.push(shuffle(users)[0]._id);
+            updatedUsers.push(await userService.patch(users[i]._id,users[i]));
+        }
+        console.log("\n Updated Users: ", updatedUsers);
+
+        return updatedUsers;
+    })
     .then(async function(createdUsers){
 
-        console.log("\n Users: ", createdUsers);
 
         // Making 20 posts and assigning them random users as creators
-        for(var i = 0; i < 20;i++){
+        for(var i = 0; i < 50;i++){
             // Create a random amount of comments for each post
 
             var post = await seed('posts',

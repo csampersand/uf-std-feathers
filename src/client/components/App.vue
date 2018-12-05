@@ -1,6 +1,12 @@
 <script>
     import * as services from '../services/'
-    import swal from 'sweetalert';
+
+    // Style components
+    import swal from 'sweetalert'
+    import bootstrap from 'bootstrap'
+
+    import Navbar from '../components/Navbar.vue'
+    import Sidebar from '../components/Sidebar.vue'
 
     export default {
         data() {
@@ -58,7 +64,7 @@
                                 timer: 2000
                             });
                         }
-                        this.$router.push('/feed');
+                        this.$router.push('/explore');
                     })
                     .catch(error => {
                         swal("Uh oh!", "We couldn't log you in. Please try again.", "error", {
@@ -76,23 +82,59 @@
                     timer: 2000
                 });
                 this.$router.push('/login');
+            },
+            follow(userId){
+                if(userId){
+                    this.user.following.push(userId);
+                    services.userService.patch(this.user._id,this.user).then(()=>{
+                        swal("Followed", "Succesfully followed.", "success", {
+                            buttons: false,
+                            timer: 2000
+                        });
+                    });
+                }
+            },
+            unfollow(userId){
+                if(userId){
+                    this.user.following.splice(this.user.following.indexOf(),1);
+                    services.userService.patch(this.user._id,this.user).then(()=>{
+                        swal("Unfollowed", "Succesfully Unfollowed.", "success", {
+                            buttons: false,
+                            timer: 2000
+                        });
+                    });
+                }
             }
+        },
+        components: {
+            Navbar,
+            Sidebar,
         }
     }
 </script>
 
 <template>
-    <div id="app" class="toggled">
+    <div id="app">
         <navbar
             v-bind:user="user"
             v-on:logout="logout"></navbar>
         <!-- route outlet -->
         <!-- component matched by the route will render here -->
-        <div id="wrapper" v-bind:class="{ toggled: user }">
-            <sidebar></sidebar>
+        <div id="wrapper" v-bind:class="{ toggled: user && this.$route.path.includes('/explore') }">
+            <sidebar>
+
+            </sidebar>
             <router-view id="page-content-wrapper"
                 v-on:login="login"
+                v-on:follow="follow"
+                v-on:unfollow="unfollow"
                 v-bind:user="user"></router-view>
         </div>
     </div>
 </template>
+
+<style lang="scss">
+@import "bootstrap/scss/bootstrap.scss";
+@import "../styles/_bootswatch.scss";
+@import "../styles/_variables.scss";
+</style>

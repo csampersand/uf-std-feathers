@@ -5,18 +5,27 @@ Vue.use(Router)
 
 import * as services from '../services'
 
-import Navbar from '../components/Navbar.vue'
-import Sidebar from '../components/Sidebar.vue'
 
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
+import Explore from '../components/Explore.vue'
+import Major from '../components/Major.vue'
 import Feed from '../components/Feed.vue'
+import Blog from '../components/UserAccount.vue'
+import About from '../components/Home.vue'
+import Profile from '../components/Profile.vue'
+import Admin from '../components/Admin.vue'
 
-Vue.component('Navbar', Navbar);
 Vue.component('Login', Login);
 Vue.component('Register', Register);
-Vue.component('Sidebar', Sidebar);
+Vue.component('Explore', Explore);
 Vue.component('Feed', Feed);
+Vue.component('Blog', Blog);
+Vue.component('About', About);
+Vue.component('Profile', Profile);
+Vue.component('Admin', Admin);
+
+Vue.component('Major', Major);
 
 // VUE ROUTING
 
@@ -25,9 +34,6 @@ Vue.component('Feed', Feed);
 
 // 1. Define route components.
 // These can be imported from other files
-const About = { template: '<h1>About UF-STD</h1>'}
-const Explore = { template: '<h1>Explore</h1>' }
-const Profile = { template: '<h1>Profile</h1>' }
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -35,9 +41,12 @@ const Profile = { template: '<h1>Profile</h1>' }
 export default new Router({
     routes: [
         { path: '/', component: About},
-        { path: '/explore', component: Explore },
         { path: '/feed', component: Feed },
+        { path: '/explore', component: Explore },
+        { path: '/explore/:majorId?', component: Major, props: true },
         { path: '/profile', component: Profile },
+        { path: '/blog/:userId',name:"blog" ,  component: Blog, props: true },
+        { path: '/admin', component: Admin},
 
         // Auth pages
         { path: '/login', component: Login },

@@ -6,7 +6,7 @@ import Post from './Post.vue'
 import Sidebar from './Sidebar.vue'
 
 export default {
-    props: ['user'],
+    props: ['user', 'majorId'],
     data() {
         return {
             posts: null,
@@ -25,10 +25,28 @@ export default {
             }).then(posts =>
             this.posts = posts.data);
         },
+        getMajors(){
+            if(this.$route.params.majorId){
+                services.majorService.find({
+                query:{
+                    _id: this.$route.params.majorId
+                }
+            }).then(posts => this.posts = posts.data);
+                this.major = major.data[0];
+            }
+            else{
+                this.major = null;
+            }
+
+        },
+        follow(userId){
+            this.$emit('follow',userId);
+     },
         unfollow(userId){
             this.$emit('unfollow',userId);
         }
-     },
+    },
+
     components: {
         Post
     }
@@ -40,25 +58,23 @@ export default {
           <h1 class="display-3" style="padding-bottom:20px;" v-if="major">
               <b>{{major.majorName}}</b>
               </h1>
-            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Your Feed</b></h1>
+            <h1 class="display-3" style="padding-bottom:20px;" v-else><b>Explore</b></h1>
 
-            <div v-if="user.following.length == 0" style="font-size: 24px">
-                You're not following anyone right now! Go to the <b>Explore</b> tab and follow some blogs to see content here! 😉
+            <div v-if="posts.length == 0" style="font-size: 24px">
+                There aren't any posts here right now. How about you make one!
             </div>
-
-    <div v-if="posts && user">
-        <post
-            v-for="post in posts"
-            :key="post._id"
-            v-if="user.following.includes(post.author._id) && post.author._id != user._id"
-            v-bind:major="major"
-            v-bind:post="post"
-            v-bind:user="user"
-            v-on:unfollow="unfollow">
-        </post>
-
-    </div>
-
+            <div v-if="posts && user">
+                <post
+                    v-if="major == null || post.author.major._id == major._id"
+                    v-for="post in posts"
+                    :key="post._id"
+                    v-bind:major="major"
+                    v-bind:post="post"
+                    v-bind:user="user"
+                    v-on:follow="follow"
+                    v-on:unfollow="unfollow">
+                </post>
+            </div>
         </div>
     </div>
 </template>
