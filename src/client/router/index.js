@@ -10,14 +10,15 @@ import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Explore from '../components/Explore.vue'
 import Feed from '../components/Feed.vue'
-import Profile from '../components/UserAccount.vue'
+import Blog from '../components/UserAccount.vue'
 import About from '../components/Home.vue'
 
 Vue.component('Login', Login);
 Vue.component('Register', Register);
 Vue.component('Explore', Explore);
 Vue.component('Feed', Feed);
-Vue.component('Profile', Profile);
+// Vue.component('Profile', Profile);
+Vue.component('Blog', Blog);
 Vue.component('About', About);
 
 // VUE ROUTING
@@ -27,6 +28,7 @@ Vue.component('About', About);
 
 // 1. Define route components.
 // These can be imported from other files
+const Profile = { template: '<h1>Profile</h1>'}
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -37,6 +39,7 @@ export default new Router({
         { path: '/explore/:majorId?',name:"explore" ,  component: Explore, props: true },
         { path: '/feed',name:"feed", component: Feed , props: true},
         { path: '/profile', component: Profile },
+        { path: '/blog/:userId',name:"blog" ,  component: Blog, props: true },
 
         // Auth pages
         { path: '/login', component: Login },

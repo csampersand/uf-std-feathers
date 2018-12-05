@@ -6,20 +6,35 @@ import * as services from '../services'
         props: ['user'],
         data() {
         return {
-            posts: null
+            posts: null,
+            author:null
         }
     },
+    watch: {
+    '$route.params.userId': function () {
+      this.getUser()
+    }
+  },
     created() {
         this.getPosts();
+        this.getUser();
     },
         methods:{
         getPosts() {
+        if(this.$route.params.userId){
             services.postService.find({
                 query: {
                     $sort: { updatedAt: -1 }
                 }
             }).then(posts =>
             this.posts = posts.data);
+            }
+        },
+        getUser(){
+            if(this.$route.params.userId){
+                services.userService.get(this.$route.params.userId).then(author => this.author = author);
+                services.majorService.get(this.author.major).then(major => this.author.major = major);
+            }
         },
         swapText() {
         var x = document.getElementById("myComments");
@@ -44,17 +59,17 @@ import * as services from '../services'
 </script>
 
 <template>
-<div v-if="user">
-        <div class="user-account-body" >
+<div v-if="author">
+        <div v-if="author.major" class="user-account-body" >
       <!-- <img class="user-account-img" src="./img/blank-profile-img.png"> -->
 
       <div class="user-account-card" >
 
-        <h1>{{user.fname}}</h1>
-        <p class="user-account-title">{{user.major.majorName}}, {{user.gradYear}}</p>
+        <h1>{{author.fname}}</h1>
+        <p class="user-account-title">{{author.major.majorName}}, {{author.gradYear}}</p>
         <p style="text-align:left; padding-left:10px; padding-right:10px;">
           <b>Bio: </b>
-            {{user.bio}}
+            {{author.bio}}
         <a class="user-account-a" href="http://instagram.com"><i class="fa fa-instagram" style="font-size:40px"></i></a>
         <a class="user-account-a" href="http://twitter.com"><i class="fa fa-twitter" style="font-size:40px"></i></a>
         <a class="user-account-a" href="http://linkedin.com"><i class="fa fa-linkedin" style="font-size:40px"></i></a>
@@ -68,14 +83,14 @@ import * as services from '../services'
     <!-- BLOG POST -->
     <dir v-if="posts">
         <div style="float: right; width: 65%;">
-            <h1 class="display-3" style="padding-bottom:20px;"><b>{{user.fname}}'s Blog</b></h1>
+            <h1 class="display-3" style="padding-bottom:20px;"><b>{{author.fname}}'s Blog</b></h1>
         </div>
 
-  <div style="float: right; width: 65%;"  v-for="post in posts" :key="post._id" v-if="post.author._id == user._id">
+  <div style="float: right; width: 65%;"  v-for="post in posts" :key="post._id" v-if="post.author._id == author._id">
 
       <div class="jumbotron" style="padding-top:10px; padding-bottom:10px;">
         <h2 class="display-4">{{post.title}}</h2>
-        <h6><i>posted by </i><b>{{user.fname}}</b></h6>
+        <h6><i>posted by </i><b>{{author.fname}}</b></h6>
         <hr style="width: 90%;">
 
         <p class="blog-text">
