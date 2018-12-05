@@ -19,7 +19,7 @@
         "header": {
           "typ": "access"
         },
-        "audience": "uf-std.herokuapp.com",
+        "audience": "uf-std-2.herokuapp.com",
         "subject": "anonymous",
         "issuer": "feathers",
         "algorithm": "HS256",
