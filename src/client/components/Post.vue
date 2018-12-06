@@ -41,14 +41,14 @@
                                 timer: 2000
                             });
                             this.deleted = true;
+                        }).catch(() => {
+                            swal("Uh oh!", "There was an error deleting your post. Please try again later.", "error", {
+                                buttons: false,
+                                timer: 2000
+                            });
                         });
                     }
-                }).catch(() => {
-                    swal("Uh oh!", "There was an error deleting your post. Please try again later.", "error", {
-                        buttons: false,
-                        timer: 2000
-                    });
-                })
+                });
             }
         }
     }

@@ -5,8 +5,10 @@ import superagent from 'superagent';
 import localStorage from 'localstorage-memory';
 
 export const client = feathers()
-    .configure(rest('http://localhost:3030').superagent(superagent))
+    .configure(rest().superagent(superagent))
     .configure(auth({ storage: window.localStorage }));
+
+console.log("Using the url",rest());
 
 export const postService = client.service('posts');
 export const userService = client.service('users');
